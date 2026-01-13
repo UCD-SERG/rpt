@@ -1,4 +1,4 @@
-# packagename (development version)
+# r.package.template (development version)
 
 ## New features
 

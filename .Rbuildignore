@@ -1,8 +1,8 @@
 ^.*\.Rproj$
 ^\.Rproj\.user$
-^packagename\.Rcheck$
-^packagename.*\.tar\.gz$
-^packagename.*\.tgz$
+^r\.package\.template\.Rcheck$
+^r\.package\.template.*\.tar\.gz$
+^r\.package\.template.*\.tgz$
 ^data-raw$
 ^README\.Rmd$
 ^codecov\.yml$

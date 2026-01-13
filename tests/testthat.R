@@ -9,4 +9,4 @@
 library(testthat)
 library(r.package.template)
 
-test_check("packagename")
+test_check("r.package.template")

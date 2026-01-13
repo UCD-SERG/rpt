@@ -1,4 +1,4 @@
-Package: packagename
+Package: r.package.template
 Title: What the Package Does (One Line, Title Case)
 Version: 0.0.0.9000
 Authors@R: c(
@@ -6,8 +6,8 @@ Authors@R: c(
   )
 Description: What the package does (one paragraph).
 License: MIT + file LICENSE
-URL: https://github.com/UCD-SERG/packagename, https://ucd-serg.github.io/packagename/
-BugReports: https://github.com/UCD-SERG/packagename/issues
+URL: https://github.com/UCD-SERG/r.package.template, https://ucd-serg.github.io/r.package.template/
+BugReports: https://github.com/UCD-SERG/r.package.template/issues
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.3
