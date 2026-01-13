@@ -15,12 +15,12 @@ knitr::opts_chunk$set(
 ```
 
 ```{r setup}
-library(packagename)
+library(r.package.template)
 ```
 
 ## Introduction
 
-This vignette provides an introduction to the `{packagename}` package.
+This vignette provides an introduction to the `{r.package.template}` package.
 
 ## Basic Usage
 

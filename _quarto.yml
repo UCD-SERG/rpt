@@ -1,30 +1,30 @@
-format: 
-  html: default
-  beamer:
-    theme: Madrid
-    slide-level: 2
-    keep-tex: true
-    toc: false
-    incremental: false
-  docx: 
-    crossref:
-      ref-hyperlink: true
-    keep-md: true
-    notes-after-punctuation: true
+project:
+  render:
+    - "*.qmd"      # Render all Quarto markdown files
+    - "!data-raw/" # Exclude anything in the data-raw directory
+author: "UC Davis Seroepidemiology Research Group (UCD-SERG)"
+date: '`r Sys.Date()`'
+format:
+  html:
+    number-sections: true
     toc: true
-    echo: false
-    fig-dpi: 600
-    toc-depth: 4
-    cap-location: top
+    html-math-method: mathjax
     fig-cap-location: top
-    appendix-title: "Sup."
-    tbl-cap-location: top
+    echo: false
+  revealjs:
+    reference-location: document
+    echo: false
+    html-math-method: mathjax
+    scrollable: true
+    auto-stretch: true
+    fig-height: 3
+    fig-width: 7
+    number-sections: true
+    number-depth: 2
+    fig-cap-location: top
+  pptx:
     number-sections: false
-    number-depth: 3
-    link-citations: true
-    date: last-modified
-    date-format: "[Last modified:] YYYY-MM-DD: H:mm:ss (A)"
-    embed-resources: false
-    appendix-style: plain
-    mainfont: serif
-  revealjs: default
+    slide-level: 2
+    reference-location: document
+    # reference-doc: vignettes/articles/templates/Gates_template.pptx
+bibliography: vignettes/references.bib
