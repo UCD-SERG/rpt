@@ -81,6 +81,37 @@ devtools::test_file("tests/testthat/test-example_function.R")
 covr::package_coverage()
 ```
 
+## Local Validation Requirements
+
+**CRITICAL**: Before committing any code changes or requesting review,
+ALWAYS run the following validation commands locally:
+
+1.  **[`lintr::lint_package()`](https://lintr.r-lib.org/reference/lint.html)** -
+    Check code style and identify linting issues
+2.  **[`devtools::document()`](https://devtools.r-lib.org/reference/document.html)** -
+    Generate/update documentation from roxygen2 comments
+3.  **[`devtools::test()`](https://devtools.r-lib.org/reference/test.html)** -
+    Run all test suites to ensure tests pass
+4.  **[`devtools::check()`](https://devtools.r-lib.org/reference/check.html)** -
+    Run R CMD check to validate package structure and compliance
+
+These commands must be run in this order and all must pass without
+errors before pushing changes or requesting code review. This ensures
+that CI/CD workflows will pass and prevents wasting reviewer time on
+fixable issues.
+
+### Example Validation Workflow
+
+``` r
+# Complete validation sequence before committing
+devtools::document()    # Update documentation
+devtools::test()        # Verify all tests pass
+devtools::check()       # Run full package check
+lintr::lint_package()   # Verify code style
+
+# Only commit and push if all checks pass
+```
+
 ## Package Structure
 
 - `R/` - R source files
