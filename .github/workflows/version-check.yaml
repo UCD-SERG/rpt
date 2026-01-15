@@ -9,7 +9,7 @@ name: Version increment check
 
 jobs:
   version-check:
-    if: ${{ github.event_name == 'pull_request' && !contains(github.event.pull_request.labels.*.name, 'no version increment') }}
+    if: ${{ !contains(github.event.pull_request.labels.*.name, 'no version increment') }}
     runs-on: ubuntu-latest
     env:
       GITHUB_PAT: ${{ github.token }}
