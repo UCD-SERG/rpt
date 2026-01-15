@@ -15,24 +15,14 @@ Language: en-US
 Depends: 
     R (>= 4.1.0)
 Imports: 
-    cli,
-    dplyr,
-    ggplot2,
-    rlang,
-    stats,
-    tibble,
-    tidyr,
-    utils
+    stats
 Suggests: 
     knitr,
-    readr,
     rmarkdown,
     spelling,
     testthat (>= 3.0.0),
-    tidyverse,
     withr,
     quarto
 Config/testthat/edition: 3
-Config/Needs/check: readr
 LazyData: true
 VignetteBuilder: knitr, quarto
