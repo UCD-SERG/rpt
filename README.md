@@ -1,60 +1,44 @@
-# R Package Template
 
-A comprehensive template for creating R packages following UCD-SERG standards, based on the structure of [serocalculator](https://github.com/UCD-SERG/serocalculator) and [serodynamics](https://github.com/ucdavis/serodynamics/).
+<!-- README.md is generated from README.Rmd. Please edit that file -->
 
-## Features
+# `{r.package.template}`
 
-This template includes:
+<!-- badges: start -->
 
-- **Standard R package structure** with `R/`, `tests/`, `man/`, `vignettes/`, `data/`, and `data-raw/` directories
-- **GitHub Actions workflows** for:
-  - R-CMD-check on multiple platforms
-  - Test coverage reporting with codecov
-  - pkgdown documentation deployment
-  - Linting and spell checking
-  - Automated NEWS.md and version checks
-  - PR commands for documentation and styling
-- **Code quality tools**:
-  - `.lintr` configuration for consistent code style
-  - Example test files using testthat
-  - codecov.yml for test coverage configuration
-- **Documentation**:
-  - README.Rmd template with badges
-  - pkgdown configuration for website generation
-  - Example vignettes
-  - Quarto configuration for advanced documentation
-- **Contributing guidelines**:
-  - CONTRIBUTING.md with detailed instructions
-  - Pull request template
-  - Code of Conduct
-  - Issue templates
+[![R-CMD-check](https://github.com/UCD-SERG/r.package.template/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/UCD-SERG/r.package.template/actions/workflows/R-CMD-check.yaml)
+[![Codecov test
+coverage](https://codecov.io/gh/UCD-SERG/r.package.template/graph/badge.svg)](https://app.codecov.io/gh/UCD-SERG/r.package.template)
+[![CodeFactor](https://www.codefactor.io/repository/github/ucd-serg/r.package.template/badge)](https://www.codefactor.io/repository/github/ucd-serg/r.package.template)
+[![CRAN
+status](https://www.r-pkg.org/badges/version/r.package.template)](https://CRAN.R-project.org/package=r.package.template)
+[![Lifecycle:
+experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
+<!-- badges: end -->
 
-## Usage
+The goal of `{r.package.template}` is to …
 
-1. Clone this repository or use it as a template
-2. Replace `packagename` with your actual package name in all files
-3. Update DESCRIPTION with your package details
-4. Update README.Rmd with your package information
-5. Add your R functions to the `R/` directory
-6. Add tests to the `tests/testthat/` directory
-7. Add documentation to vignettes
-8. Run `devtools::document()` to generate man pages
-9. Run `devtools::check()` to ensure everything works
+## Installation
 
-## Files to Update
+You can install the development version of `{r.package.template}` from
+[GitHub](https://github.com/) with:
 
-When using this template, update the following:
+``` r
+# install.packages("pak")
+pak::pak("UCD-SERG/r.package.template")
+```
 
-- [ ] `DESCRIPTION` - package metadata
-- [ ] `README.Rmd` - package description and examples
-- [ ] `.Rbuildignore` - replace `packagename` with your package name
-- [ ] `.gitignore` - replace `packagename` with your package name
-- [ ] `packagename.Rproj` - rename to `yourpackage.Rproj`
-- [ ] `pkgdown/_pkgdown.yml` - update URLs and content structure
-- [ ] `.github/CONTRIBUTING.md` - update package name
-- [ ] All R files in `R/` directory
-- [ ] All test files in `tests/` directory
+## Example
 
-## License
+This is a basic example which shows you how to solve a common problem:
 
-MIT License - see LICENSE file for details
+``` r
+library(r.package.template)
+## basic example code
+```
+
+## Code of Conduct
+
+Please note that the `{r.package.template}` project is released with a
+[Contributor Code of
+Conduct](https://contributor-covenant.org/version/2/1/CODE_OF_CONDUCT.html).
+By contributing to this project, you agree to abide by its terms.
