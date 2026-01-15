@@ -76,10 +76,10 @@ covr::package_coverage()
 
 **CRITICAL**: Before committing any code changes or requesting review, ALWAYS run the following validation commands locally:
 
-1. **`devtools::document()`** - Generate/update documentation from roxygen2 comments
-2. **`devtools::test()`** - Run all test suites to ensure tests pass
-3. **`devtools::check()`** - Run R CMD check to validate package structure and compliance
-4. **`lintr::lint_package()`** - Check code style and identify linting issues
+1. **`lintr::lint_package()`** - Check code style and identify linting issues
+2. **`devtools::document()`** - Generate/update documentation from roxygen2 comments
+3. **`devtools::test()`** - Run all test suites to ensure tests pass
+4. **`devtools::check()`** - Run R CMD check to validate package structure and compliance
 
 These commands must be run in this order and all must pass without errors before pushing changes or requesting code review. This ensures that CI/CD workflows will pass and prevents wasting reviewer time on fixable issues.
 
