@@ -1,13 +1,13 @@
-Package: r.package.template
+Package: rpt
 Title: What the Package Does (One Line, Title Case)
-Version: 0.0.0.9000
+Version: 0.0.0.9001
 Authors@R: c(
     person("First", "Last", , "first.last@example.com", role = c("aut", "cre"))
   )
 Description: What the package does (one paragraph).
 License: MIT + file LICENSE
-URL: https://github.com/UCD-SERG/r.package.template, https://ucd-serg.github.io/r.package.template/
-BugReports: https://github.com/UCD-SERG/r.package.template/issues
+URL: https://github.com/UCD-SERG/rpt, https://ucd-serg.github.io/rpt/
+BugReports: https://github.com/UCD-SERG/rpt/issues
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.3
@@ -15,24 +15,13 @@ Language: en-US
 Depends: 
     R (>= 4.1.0)
 Imports: 
-    cli,
-    dplyr,
-    ggplot2,
-    rlang,
-    stats,
-    tibble,
-    tidyr,
-    utils
+    stats
 Suggests: 
     knitr,
-    readr,
     rmarkdown,
     spelling,
     testthat (>= 3.0.0),
-    tidyverse,
     withr,
     quarto
 Config/testthat/edition: 3
-Config/Needs/check: readr
-LazyData: true
 VignetteBuilder: knitr, quarto

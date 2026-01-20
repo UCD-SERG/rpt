@@ -7,6 +7,6 @@
 # * https://testthat.r-lib.org/articles/special-files.html
 
 library(testthat)
-library(r.package.template)
+library(rpt)
 
-test_check("r.package.template")
+test_check("rpt")
