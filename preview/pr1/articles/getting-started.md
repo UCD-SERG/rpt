@@ -1,14 +1,13 @@
 # Getting Started
 
 ``` r
-library(r.package.template)
+library(rpt)
 ```
 
 ## Introduction
 
 This vignette provides an introduction to the
-[r.package.template](https://github.com/UCD-SERG/r.package.template)
-package.
+[rpt](https://github.com/UCD-SERG/rpt) package.
 
 ## Basic Usage
 

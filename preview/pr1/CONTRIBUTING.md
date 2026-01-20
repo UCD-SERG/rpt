@@ -88,5 +88,5 @@ email describing the problems.
 ## Code of Conduct
 
 Please note that this project is released with a [Contributor Code of
-Conduct](https:/ucd-serg.github.io/r.package.template/preview/pr1/CODE_OF_CONDUCT.md).
+Conduct](https:/ucd-serg.github.io/rpt/preview/pr1/CODE_OF_CONDUCT.md).
 By contributing to this project you agree to abide by its terms.

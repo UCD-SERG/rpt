@@ -69,11 +69,10 @@ from:
 
 ## How to Use This Template
 
-See
-[USAGE.md](https:/ucd-serg.github.io/r.package.template/preview/USAGE.md)
-for detailed instructions and
-[CHECKLIST.md](https:/ucd-serg.github.io/r.package.template/preview/CHECKLIST.md)
-for a step-by-step setup guide.
+See [USAGE.md](https:/ucd-serg.github.io/rpt/preview/USAGE.md) for
+detailed instructions and
+[CHECKLIST.md](https:/ucd-serg.github.io/rpt/preview/CHECKLIST.md) for a
+step-by-step setup guide.
 
 ### Quick Steps
 
