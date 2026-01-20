@@ -1,2 +1,2 @@
-# r-package-template
+# rpt (R package template)
 A template for R packages
