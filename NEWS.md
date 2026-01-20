@@ -1,5 +1,3 @@
-# r.package.template (development version)
+# r.package.template 0.0.0.9000
 
-## New features
-
-* Initial release
+* Initial development version
