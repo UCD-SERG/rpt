@@ -20,7 +20,7 @@ jobs:
       - name: Check if version increment is required
         id: check_label
         run: |
-          if [[ "${{ contains(github.event.pull_request.labels.*.name, 'no version increment') }}" == "true" ]]; then
+          if ${{ contains(github.event.pull_request.labels.*.name, 'no version increment') }}; then
             echo "Version increment not required (label present)"
             echo "skip=true" >> $GITHUB_OUTPUT
           else
