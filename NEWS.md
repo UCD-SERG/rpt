@@ -1,3 +1,3 @@
-# r.package.template 0.0.0.9000
+# rpt 0.0.0.9000
 
 * Initial development version
