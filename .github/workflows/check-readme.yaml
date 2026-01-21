@@ -10,7 +10,8 @@ name: check-readme
 jobs:
   check-readme:
     runs-on: ${{ matrix.config.os }}
-    container: ${{ matrix.config.os == 'ubuntu-latest' && 'rocker/verse:latest' || null }}
+    container:
+      image: rocker/verse:latest
 
     name: ${{ matrix.config.os }} (${{ matrix.config.r }})
 
