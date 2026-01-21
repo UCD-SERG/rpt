@@ -35,6 +35,16 @@ You can install the development version of `{rpt}` from [GitHub](https://github.
 pak::pak("UCD-SERG/rpt")
 ```
 
+## Setup
+
+After cloning this template, you should run:
+
+```r
+usethis::use_pkgdown_github_pages()
+```
+
+This will initialize the `gh-pages` branch for hosting your package documentation site.
+
 ## Example
 
 This is a basic example which shows you how to solve a common problem:
