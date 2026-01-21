@@ -96,6 +96,47 @@ jobs:
         run: |
           echo "Subdir is set to: ${{ env.subdir }}"
 
+      - name: Initialize gh-pages root with pkgdown marker
+        if: env.subdir == ''
+        run: |
+          # This step ensures the gh-pages branch root has a pkgdown.yml marker
+          # so that pkgdown recognizes it as a valid deployment target
+          
+          # Fetch gh-pages branch
+          git fetch origin gh-pages 2>/dev/null || {
+            echo "gh-pages branch doesn't exist yet, it will be created by pkgdown"
+            exit 0
+          }
+          
+          # Check if pkgdown.yml exists at root of gh-pages
+          if git show origin/gh-pages:pkgdown.yml > /dev/null 2>&1; then
+            echo "pkgdown.yml already exists at gh-pages root"
+            exit 0
+          fi
+          
+          echo "Creating pkgdown.yml marker at gh-pages root"
+          
+          # Checkout gh-pages in a temporary location
+          git worktree add /tmp/gh-pages-init origin/gh-pages
+          cd /tmp/gh-pages-init
+          
+          # Create minimal pkgdown.yml marker
+          cat > pkgdown.yml << 'EOF'
+pandoc: 3.1.11
+pkgdown: 2.2.0.9000
+pkgdown_sha: ~
+last_built: 2026-01-21T03:06Z
+EOF
+          
+          # Commit and push
+          git add pkgdown.yml
+          git commit -m "Add pkgdown.yml marker to gh-pages root [skip ci]"
+          git push origin HEAD:gh-pages
+          
+          # Clean up
+          cd /home/runner/work/rpt/rpt
+          git worktree remove /tmp/gh-pages-init
+
       - name: Deploy pkgdown site
         id: deploy
         shell: Rscript {0}
