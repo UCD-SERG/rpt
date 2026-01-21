@@ -38,6 +38,8 @@ name: pkgdown
 jobs:
   pkgdown-build:
     runs-on: ubuntu-latest
+    container:
+      image: rocker/verse:latest
     if: ${{ !(github.event_name == 'pull_request' && github.event.action == 'closed') }}
      # Only restrict concurrency for non-PR jobs
     concurrency:
@@ -46,6 +48,10 @@ jobs:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
     steps:
       - uses: actions/checkout@v4
+
+      - name: Configure git safe directory
+        run: |
+          git config --global --add safe.directory /__w/rpt/rpt
 
       - name: Configure git
         run: |
@@ -127,12 +133,18 @@ jobs:
   pkgdown-clean:
     if: ${{ github.event_name == 'pull_request' && github.event.action == 'closed' }}
     runs-on: ubuntu-latest
+    container:
+      image: rocker/verse:latest
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
     steps:
       - uses: actions/checkout@v4
         with:
           ref: "gh-pages"
+
+      - name: Configure git safe directory
+        run: |
+          git config --global --add safe.directory /__w/rpt/rpt
 
       - name: Clean up PR Preview
         run: |

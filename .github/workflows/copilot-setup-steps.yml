@@ -21,6 +21,8 @@ on:
 jobs:
   copilot-setup-steps:
     runs-on: ubuntu-latest
+    container:
+      image: rocker/verse:latest
 
     permissions:
       contents: read
