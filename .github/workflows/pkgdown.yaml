@@ -134,7 +134,7 @@ jobs:
           echo "pandoc: 3.1.11" > pkgdown.yml
           echo "pkgdown: 2.2.0.9000" >> pkgdown.yml
           echo "pkgdown_sha: ~" >> pkgdown.yml
-          echo "last_built: $(date -u +%Y-%m-%dT%H:%MZ)" >> pkgdown.yml
+          echo "last_built: $(date -u +%Y-%m-%dT%H:%M:%SZ)" >> pkgdown.yml
           
           # Commit and push
           git add pkgdown.yml
