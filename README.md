@@ -36,6 +36,14 @@ library(rpt)
 ## basic example code
 ```
 
+## Other R Package Template Options
+
+If you’re looking for alternative R package templates, you may also want
+to consider:
+
+- [r.pkg.template](https://github.com/insightsengineering/r.pkg.template/) -
+  A comprehensive R package template from Insights Engineering
+
 ## Code of Conduct
 
 Please note that the `{rpt}` project is released with a [Contributor
