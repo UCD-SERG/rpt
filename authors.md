@@ -7,7 +7,7 @@
 ## Citation
 
 Source:
-[`DESCRIPTION`](https://github.com/UCD-SERG/rpt/blob/main/DESCRIPTION)
+[`DESCRIPTION`](https://github.com/UCD-SERG/rpt/blob/HEAD/DESCRIPTION)
 
 Last F (2026). *rpt: What the Package Does (One Line, Title Case)*. R
 package version 0.0.0.9001, <https://github.com/UCD-SERG/rpt>.
