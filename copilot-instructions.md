@@ -33,12 +33,8 @@ environment with all required dependencies.
     details
 4.  Add your R functions to `R/` directory
 5.  Add tests to `tests/testthat/` directory
-6.  Run
-    [`devtools::document()`](https://devtools.r-lib.org/reference/document.html)
-    to generate documentation
-7.  Run
-    [`devtools::check()`](https://devtools.r-lib.org/reference/check.html)
-    to validate your package
+6.  Run `devtools::document()` to generate documentation
+7.  Run `devtools::check()` to validate your package
 
 ## Development Workflow
 
@@ -86,14 +82,13 @@ covr::package_coverage()
 **CRITICAL**: Before committing any code changes or requesting review,
 ALWAYS run the following validation commands locally:
 
-1.  **[`lintr::lint_package()`](https://lintr.r-lib.org/reference/lint.html)** -
-    Check code style and identify linting issues
-2.  **[`devtools::document()`](https://devtools.r-lib.org/reference/document.html)** -
-    Generate/update documentation from roxygen2 comments
-3.  **[`devtools::test()`](https://devtools.r-lib.org/reference/test.html)** -
-    Run all test suites to ensure tests pass
-4.  **[`devtools::check()`](https://devtools.r-lib.org/reference/check.html)** -
-    Run R CMD check to validate package structure and compliance
+1.  **`lintr::lint_package()`** - Check code style and identify linting
+    issues
+2.  **`devtools::document()`** - Generate/update documentation from
+    roxygen2 comments
+3.  **`devtools::test()`** - Run all test suites to ensure tests pass
+4.  **`devtools::check()`** - Run R CMD check to validate package
+    structure and compliance
 
 These commands must be run in this order and all must pass without
 errors before pushing changes or requesting code review. This ensures

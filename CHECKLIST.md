@@ -67,15 +67,13 @@ Add your R functions to `R/` directory
 
 Add roxygen2 documentation to all functions
 
-Generate documentation:
-[`devtools::document()`](https://devtools.r-lib.org/reference/document.html)
+Generate documentation: `devtools::document()`
 
 Remove example test from `tests/testthat/test-example_function.R`
 
 Add your tests to `tests/testthat/`
 
-Run tests:
-[`devtools::test()`](https://devtools.r-lib.org/reference/test.html)
+Run tests: `devtools::test()`
 
 ## Optional Components
 
@@ -91,17 +89,13 @@ Update `inst/WORDLIST` with package-specific terms
 
 ## Quality Checks
 
-Run
-[`devtools::check()`](https://devtools.r-lib.org/reference/check.html) -
-should pass with no errors, warnings, or notes
+Run `devtools::check()` - should pass with no errors, warnings, or notes
 
 Run
 [`spelling::spell_check_package()`](https://docs.ropensci.org/spelling//reference/spell_check_package.html) -
 fix any typos
 
-Run
-[`lintr::lint_package()`](https://lintr.r-lib.org/reference/lint.html) -
-address any style issues
+Run `lintr::lint_package()` - address any style issues
 
 Check test coverage:
 [`covr::package_coverage()`](http://covr.r-lib.org/reference/package_coverage.md) -

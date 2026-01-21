@@ -45,17 +45,13 @@ your own package.
 
     - Add R functions to `R/` directory
     - Add roxygen2 comments above each function
-    - Run
-      [`devtools::document()`](https://devtools.r-lib.org/reference/document.html)
-      to generate documentation
+    - Run `devtools::document()` to generate documentation
 
 6.  **Add tests**
 
     - Add test files to `tests/testthat/`
     - Name test files `test-*.R`
-    - Run
-      [`devtools::test()`](https://devtools.r-lib.org/reference/test.html)
-      to run tests
+    - Run `devtools::test()` to run tests
 
 ## Detailed Steps
 
@@ -92,8 +88,7 @@ my_function <- function(x) {
 }
 ```
 
-3.  Generate documentation:
-    [`devtools::document()`](https://devtools.r-lib.org/reference/document.html)
+3.  Generate documentation: `devtools::document()`
 
 ### Writing Tests
 
@@ -107,8 +102,7 @@ test_that("my_function works correctly", {
 })
 ```
 
-3.  Run tests:
-    [`devtools::test()`](https://devtools.r-lib.org/reference/test.html)
+3.  Run tests: `devtools::test()`
 
 ### Adding Data
 
@@ -121,8 +115,7 @@ test_that("my_function works correctly", {
 
 1.  Create vignettes with: `usethis::use_vignette("my-vignette")`
 2.  Edit the vignette in `vignettes/`
-3.  Build vignettes:
-    [`devtools::build_vignettes()`](https://devtools.r-lib.org/reference/build_vignettes.html)
+3.  Build vignettes: `devtools::build_vignettes()`
 
 ### Checking Your Package
 

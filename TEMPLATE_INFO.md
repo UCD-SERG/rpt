@@ -81,8 +81,7 @@ for a step-by-step setup guide.
 4.  Replace `packagename` throughout
 5.  Update DESCRIPTION metadata
 6.  Add your code and tests
-7.  Run
-    [`devtools::check()`](https://devtools.r-lib.org/reference/check.html)
+7.  Run `devtools::check()`
 8.  Push to GitHub
 
 ## Customization
