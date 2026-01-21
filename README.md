@@ -29,14 +29,9 @@ pak::pak("UCD-SERG/rpt")
 
 ## Setup
 
-After cloning this template, you should run:
-
-``` r
-usethis::use_pkgdown_github_pages()
-```
-
-This will initialize the `gh-pages` branch for hosting your package
-documentation site.
+After cloning this template, make sure your GitHub Pages settings at
+`https://github.com/UCD-SERG/[PACKAGE-NAME]/settings/pages` are
+configured to deploy from the `docs/` folder on the `gh-pages` branch.
 
 ## Example
 
