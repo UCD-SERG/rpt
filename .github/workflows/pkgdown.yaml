@@ -49,6 +49,10 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Configure git safe directory
+        run: |
+          git config --global --add safe.directory /__w/rpt/rpt
+
       - name: Configure git
         run: |
           git config --local user.name "$GITHUB_ACTOR"
@@ -137,6 +141,10 @@ jobs:
       - uses: actions/checkout@v4
         with:
           ref: "gh-pages"
+
+      - name: Configure git safe directory
+        run: |
+          git config --global --add safe.directory /__w/rpt/rpt
 
       - name: Clean up PR Preview
         run: |

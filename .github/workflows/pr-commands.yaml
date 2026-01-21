@@ -18,6 +18,10 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Configure git safe directory
+        run: |
+          git config --global --add safe.directory /__w/rpt/rpt
+
       - uses: r-lib/actions/pr-fetch@v2
         with:
           repo-token: ${{ secrets.GITHUB_TOKEN }}
@@ -56,6 +60,10 @@ jobs:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
     steps:
       - uses: actions/checkout@v4
+
+      - name: Configure git safe directory
+        run: |
+          git config --global --add safe.directory /__w/rpt/rpt
 
       - uses: r-lib/actions/pr-fetch@v2
         with:
