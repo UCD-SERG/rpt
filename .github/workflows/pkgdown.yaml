@@ -124,7 +124,7 @@ jobs:
           echo "pandoc: 3.1.11" > pkgdown.yml
           echo "pkgdown: 2.2.0.9000" >> pkgdown.yml
           echo "pkgdown_sha: ~" >> pkgdown.yml
-          echo "last_built: 2026-01-21T03:06Z" >> pkgdown.yml
+          echo "last_built: $(date -u +%Y-%m-%dT%H:%MZ)" >> pkgdown.yml
           
           # Commit and push
           git add pkgdown.yml
@@ -132,7 +132,7 @@ jobs:
           git push origin HEAD:gh-pages
           
           # Clean up
-          cd /home/runner/work/rpt/rpt
+          cd -
           git worktree remove /tmp/gh-pages-init
 
       - name: Deploy pkgdown site
