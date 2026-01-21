@@ -12,6 +12,8 @@ on:
 jobs:
   check:
     runs-on: ubuntu-latest
+    container:
+      image: rocker/verse:latest
     name: Spellcheck
     steps:
       - name: Checkout repo

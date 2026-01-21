@@ -8,6 +8,8 @@ name: "Documentation check"
 jobs:
   docs-check:
     runs-on: ubuntu-latest
+    container:
+      image: rocker/verse:latest
     env:
       GITHUB_PAT: ${{ github.token }}
     steps:

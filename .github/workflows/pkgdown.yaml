@@ -38,6 +38,8 @@ name: pkgdown
 jobs:
   pkgdown-build:
     runs-on: ubuntu-latest
+    container:
+      image: rocker/verse:latest
     if: ${{ !(github.event_name == 'pull_request' && github.event.action == 'closed') }}
      # Only restrict concurrency for non-PR jobs
     concurrency:
@@ -127,6 +129,8 @@ jobs:
   pkgdown-clean:
     if: ${{ github.event_name == 'pull_request' && github.event.action == 'closed' }}
     runs-on: ubuntu-latest
+    container:
+      image: rocker/verse:latest
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
     steps:
