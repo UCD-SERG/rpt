@@ -160,9 +160,8 @@ The template includes these workflows:
 
 ## Best Practices
 
-1.  **Follow the tidyverse style guide**: Use
-    [`styler::style_pkg()`](https://styler.r-lib.org/reference/style_pkg.html)
-    to format code
+1.  **Follow the tidyverse style guide**: Use `styler::style_pkg()` to
+    format code
 2.  **Write tests for all exported functions**: Aim for \>80% coverage
 3.  **Update NEWS.md**: Document user-facing changes
 4.  **Increment version**: Update version in DESCRIPTION for each PR
