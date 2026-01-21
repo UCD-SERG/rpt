@@ -121,12 +121,10 @@ jobs:
           cd /tmp/gh-pages-init
           
           # Create minimal pkgdown.yml marker
-          cat > pkgdown.yml << 'EOF'
-pandoc: 3.1.11
-pkgdown: 2.2.0.9000
-pkgdown_sha: ~
-last_built: 2026-01-21T03:06Z
-EOF
+          echo "pandoc: 3.1.11" > pkgdown.yml
+          echo "pkgdown: 2.2.0.9000" >> pkgdown.yml
+          echo "pkgdown_sha: ~" >> pkgdown.yml
+          echo "last_built: 2026-01-21T03:06Z" >> pkgdown.yml
           
           # Commit and push
           git add pkgdown.yml
