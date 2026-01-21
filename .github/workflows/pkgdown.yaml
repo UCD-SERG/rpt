@@ -116,9 +116,19 @@ jobs:
           
           echo "Creating pkgdown.yml marker at gh-pages root"
           
+          # Create temporary directory for worktree
+          WORKTREE_DIR="$(mktemp -d)"
+          
+          # Setup cleanup trap
+          cleanup() {
+            cd "$GITHUB_WORKSPACE"
+            git worktree remove "$WORKTREE_DIR" 2>/dev/null || true
+          }
+          trap cleanup EXIT
+          
           # Checkout gh-pages in a temporary location
-          git worktree add /tmp/gh-pages-init origin/gh-pages
-          cd /tmp/gh-pages-init
+          git worktree add "$WORKTREE_DIR" origin/gh-pages
+          cd "$WORKTREE_DIR"
           
           # Create minimal pkgdown.yml marker
           echo "pandoc: 3.1.11" > pkgdown.yml
@@ -130,10 +140,6 @@ jobs:
           git add pkgdown.yml
           git commit -m "Add pkgdown.yml marker to gh-pages root [skip ci]"
           git push origin HEAD:gh-pages
-          
-          # Clean up
-          cd -
-          git worktree remove /tmp/gh-pages-init
 
       - name: Deploy pkgdown site
         id: deploy
