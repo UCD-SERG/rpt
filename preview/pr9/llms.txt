@@ -1,0 +1,52 @@
+# `{rpt}` (*R* *p*ackage *t*emplate)
+
+The goal of [rpt](https://github.com/UCD-SERG/rpt) is to …
+
+## Installation
+
+You can install the development version of
+[rpt](https://github.com/UCD-SERG/rpt) from
+[GitHub](https://github.com/) with:
+
+``` r
+# install.packages("pak")
+pak::pak("UCD-SERG/rpt")
+```
+
+## Example
+
+This is a basic example which shows you how to solve a common problem:
+
+``` r
+library(rpt)
+## basic example code
+```
+
+## Other R Package Template Options
+
+If you’re looking for alternative R package templates, you may also want
+to consider:
+
+- [r.pkg.template](https://github.com/insightsengineering/r.pkg.template/) -
+  A comprehensive R package template from Insights Engineering
+
+## Code of Conduct
+
+Please note that the [rpt](https://github.com/UCD-SERG/rpt) project is
+released with a [Contributor Code of
+Conduct](https://contributor-covenant.org/version/2/1/CODE_OF_CONDUCT.html).
+By contributing to this project, you agree to abide by its terms.
+
+# Package index
+
+## Example Functions
+
+- [`example_function()`](https:/ucd-serg.github.io/rpt/preview/pr9/reference/example_function.md)
+  : Example Function
+
+# Articles
+
+### Get started
+
+- [Getting
+  Started](https:/ucd-serg.github.io/rpt/preview/pr9/articles/getting-started.md):
