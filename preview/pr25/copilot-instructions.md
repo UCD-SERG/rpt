@@ -82,8 +82,8 @@ covr::package_coverage()
 **CRITICAL**: Before committing any code changes or requesting review,
 ALWAYS run the following validation commands locally:
 
-1.  **`lintr::lint_package()`** - Check code style and identify linting
-    issues
+1.  **[`lintr::lint_package()`](https://lintr.r-lib.org/reference/lint.html)** -
+    Check code style and identify linting issues
 2.  **`devtools::document()`** - Generate/update documentation from
     roxygen2 comments
 3.  **`devtools::test()`** - Run all test suites to ensure tests pass

@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="index.html">rpt</a>
 
-    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Unreleased version">0.0.0.9002</small>
+    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Unreleased version">0.0.0.9003</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -105,7 +105,7 @@
 <h3 id="linting">Linting<a class="anchor" aria-label="anchor" href="#linting"></a></h3>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Lint the package</span></span>
-<span><span class="fu">lintr</span><span class="fu">::</span><span class="fu">lint_package</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu">lintr</span><span class="fu">::</span><span class="fu"><a href="https://lintr.r-lib.org/reference/lint.html" class="external-link">lint_package</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="testing">Testing<a class="anchor" aria-label="anchor" href="#testing"></a></h3>
@@ -124,7 +124,7 @@
 <h2 id="local-validation-requirements">Local Validation Requirements<a class="anchor" aria-label="anchor" href="#local-validation-requirements"></a></h2>
 <p><strong>CRITICAL</strong>: Before committing any code changes or requesting review, ALWAYS run the following validation commands locally:</p>
 <ol style="list-style-type: decimal"><li>
-<strong><code>lintr::lint_package()</code></strong> - Check code style and identify linting issues</li>
+<strong><code><a href="https://lintr.r-lib.org/reference/lint.html" class="external-link">lintr::lint_package()</a></code></strong> - Check code style and identify linting issues</li>
 <li>
 <strong><code>devtools::document()</code></strong> - Generate/update documentation from roxygen2 comments</li>
 <li>
@@ -141,7 +141,7 @@
 <span><span class="fu">devtools</span><span class="fu">::</span><span class="fu">document</span><span class="op">(</span><span class="op">)</span>    <span class="co"># Update documentation</span></span>
 <span><span class="fu">devtools</span><span class="fu">::</span><span class="fu">test</span><span class="op">(</span><span class="op">)</span>        <span class="co"># Verify all tests pass</span></span>
 <span><span class="fu">devtools</span><span class="fu">::</span><span class="fu">check</span><span class="op">(</span><span class="op">)</span>       <span class="co"># Run full package check</span></span>
-<span><span class="fu">lintr</span><span class="fu">::</span><span class="fu">lint_package</span><span class="op">(</span><span class="op">)</span>   <span class="co"># Verify code style</span></span>
+<span><span class="fu">lintr</span><span class="fu">::</span><span class="fu"><a href="https://lintr.r-lib.org/reference/lint.html" class="external-link">lint_package</a></span><span class="op">(</span><span class="op">)</span>   <span class="co"># Verify code style</span></span>
 <span><span class="fu">pkgdown</span><span class="fu">::</span><span class="fu"><a href="https://pkgdown.r-lib.org/reference/build_site.html" class="external-link">build_site</a></span><span class="op">(</span><span class="op">)</span>   <span class="co"># Build pkgdown site to verify documentation</span></span>
 <span></span>
 <span><span class="co"># Only commit and push if all checks pass</span></span></code></pre></div>

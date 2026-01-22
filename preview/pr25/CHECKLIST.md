@@ -95,7 +95,9 @@ Run
 [`spelling::spell_check_package()`](https://docs.ropensci.org/spelling//reference/spell_check_package.html) -
 fix any typos
 
-Run `lintr::lint_package()` - address any style issues
+Run
+[`lintr::lint_package()`](https://lintr.r-lib.org/reference/lint.html) -
+address any style issues
 
 Check test coverage:
 [`covr::package_coverage()`](http://covr.r-lib.org/reference/package_coverage.md) -
