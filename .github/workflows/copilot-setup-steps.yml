@@ -66,6 +66,12 @@ jobs:
             any::rmarkdown
           needs: check
 
+            # Set up Quarto - required for rendering the website
+      - name: Set up Quarto
+        uses: quarto-dev/quarto-actions/setup@v2
+        with:
+          tinytex: true
+
       - name: Verify development environment
         run: |
           echo "=== R Development Environment Status ==="
