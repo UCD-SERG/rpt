@@ -55,7 +55,7 @@
 #' math_demo(1, 2, 5)
 math_demo <- function(a, b, c) {
   # Check for valid input
-  if (a == 0) {
+  if (isTRUE(all.equal(a, 0))) {
     stop("Coefficient 'a' must be non-zero for a quadratic equation")
   }
   
