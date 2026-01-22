@@ -19,3 +19,7 @@ articles:
   navbar: ~
   contents:
   - getting-started
+  - quarto_vignette
+- title: Advanced Topics
+  contents:
+  - articles/quarto_article
