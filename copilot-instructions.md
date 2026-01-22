@@ -89,6 +89,9 @@ ALWAYS run the following validation commands locally:
 3.  **`devtools::test()`** - Run all test suites to ensure tests pass
 4.  **`devtools::check()`** - Run R CMD check to validate package
     structure and compliance
+5.  **[`pkgdown::build_site()`](https://pkgdown.r-lib.org/reference/build_site.html)** -
+    Build the pkgdown website to ensure all documentation renders
+    correctly
 
 These commands must be run in this order and all must pass without
 errors before pushing changes or requesting code review. This ensures
@@ -103,6 +106,7 @@ devtools::document()    # Update documentation
 devtools::test()        # Verify all tests pass
 devtools::check()       # Run full package check
 lintr::lint_package()   # Verify code style
+pkgdown::build_site()   # Build pkgdown site to verify documentation
 
 # Only commit and push if all checks pass
 ```
