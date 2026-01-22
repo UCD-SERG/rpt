@@ -17,7 +17,11 @@ knitr::opts_chunk$set(
 
 ```{r setup}
 #| message: false
-library(rpt)
+# Load package if available (for local development)
+# During R CMD check, the package may not be installed yet
+if (requireNamespace("rpt", quietly = TRUE)) {
+  library(rpt)
+}
 ```
 
 ## Overview
@@ -193,11 +197,11 @@ Here's how to use the package's example function with different inputs:
 
 ```{r}
 # Numeric vector
-example_function(c(5, 10, 15, 20, 25))
+rpt::example_function(c(5, 10, 15, 20, 25))
 
 # Using with generated data
 random_data <- runif(10, min = 0, max = 100)
-example_function(random_data)
+rpt::example_function(random_data)
 ```
 
 ## Code Annotations
@@ -207,7 +211,7 @@ Quarto supports code annotations for detailed explanations:
 ```{r}
 # <1>
 data <- c(1, 2, 3, 4, 5) # <2>
-result <- example_function(data) # <3>
+result <- rpt::example_function(data) # <3>
 print(result) # <4>
 ```
 1. Load sample data
