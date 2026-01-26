@@ -1,6 +1,9 @@
 ---
 title: "Quarto Vignette Example"
-format: html
+format:
+  html: default
+  revealjs:
+    output-file: quarto_vignette-revealjs.html
 vignette: >
   %\VignetteIndexEntry{Quarto Vignette Example}
   %\VignetteEngine{quarto::html}
