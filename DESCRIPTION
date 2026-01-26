@@ -22,6 +22,7 @@ Suggests:
     spelling,
     testthat (>= 3.0.0),
     withr,
-    quarto
+    quarto,
+    bslib
 Config/testthat/edition: 3
 VignetteBuilder: knitr, quarto
