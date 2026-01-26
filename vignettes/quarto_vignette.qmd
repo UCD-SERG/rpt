@@ -4,6 +4,8 @@ format:
   html: default
   revealjs:
     output-file: quarto_vignette-revealjs.html
+pkgdown:
+  as_is: true
 vignette: >
   %\VignetteIndexEntry{Quarto Vignette Example}
   %\VignetteEngine{quarto::html}
