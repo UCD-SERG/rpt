@@ -132,8 +132,9 @@
 <li>
 <strong><code>devtools::check()</code></strong> - Run R CMD check to validate package structure and compliance</li>
 <li>
-<strong><code><a href="https://pkgdown.r-lib.org/reference/build_site.html" class="external-link">pkgdown::build_site()</a></code></strong> - Build the pkgdown website to ensure all documentation renders correctly</li>
+<strong><code><a href="https://pkgdown.r-lib.org/reference/build_site.html" class="external-link">pkgdown::build_site()</a></code></strong> - <strong>MANDATORY</strong>: Build the full pkgdown website locally and inspect the output to ensure all documentation renders correctly, including vignettes, articles, and any special formats (e.g., RevealJS presentations)</li>
 </ol><p>These commands must be run in this order and all must pass without errors before pushing changes or requesting code review. This ensures that CI/CD workflows will pass and prevents wasting reviewer time on fixable issues.</p>
+<p><strong>IMPORTANT</strong>: For changes affecting documentation or vignettes, you MUST build and visually inspect the pkgdown site output (located in <code>docs/</code>) to verify that everything renders as expected. This is especially critical for multi-format documents or custom output formats.</p>
 <div class="section level3">
 <h3 id="example-validation-workflow">Example Validation Workflow<a class="anchor" aria-label="anchor" href="#example-validation-workflow"></a></h3>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
@@ -144,7 +145,11 @@
 <span><span class="fu">lintr</span><span class="fu">::</span><span class="fu">lint_package</span><span class="op">(</span><span class="op">)</span>   <span class="co"># Verify code style</span></span>
 <span><span class="fu">pkgdown</span><span class="fu">::</span><span class="fu"><a href="https://pkgdown.r-lib.org/reference/build_site.html" class="external-link">build_site</a></span><span class="op">(</span><span class="op">)</span>   <span class="co"># Build pkgdown site to verify documentation</span></span>
 <span></span>
-<span><span class="co"># Only commit and push if all checks pass</span></span></code></pre></div>
+<span><span class="co"># Manually inspect docs/ directory to verify rendering</span></span>
+<span><span class="co"># Check docs/articles/*.html for correct output</span></span>
+<span><span class="co"># Verify links, images, and special formats work correctly</span></span>
+<span></span>
+<span><span class="co"># Only commit and push if all checks pass AND visual inspection confirms correct rendering</span></span></code></pre></div>
 </div>
 </div>
 <div class="section level2">

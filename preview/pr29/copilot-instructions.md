@@ -90,13 +90,20 @@ ALWAYS run the following validation commands locally:
 4.  **`devtools::check()`** - Run R CMD check to validate package
     structure and compliance
 5.  **[`pkgdown::build_site()`](https://pkgdown.r-lib.org/reference/build_site.html)** -
-    Build the pkgdown website to ensure all documentation renders
-    correctly
+    **MANDATORY**: Build the full pkgdown website locally and inspect
+    the output to ensure all documentation renders correctly, including
+    vignettes, articles, and any special formats (e.g., RevealJS
+    presentations)
 
 These commands must be run in this order and all must pass without
 errors before pushing changes or requesting code review. This ensures
 that CI/CD workflows will pass and prevents wasting reviewer time on
 fixable issues.
+
+**IMPORTANT**: For changes affecting documentation or vignettes, you
+MUST build and visually inspect the pkgdown site output (located in
+`docs/`) to verify that everything renders as expected. This is
+especially critical for multi-format documents or custom output formats.
 
 ### Example Validation Workflow
 
@@ -108,7 +115,11 @@ devtools::check()       # Run full package check
 lintr::lint_package()   # Verify code style
 pkgdown::build_site()   # Build pkgdown site to verify documentation
 
-# Only commit and push if all checks pass
+# Manually inspect docs/ directory to verify rendering
+# Check docs/articles/*.html for correct output
+# Verify links, images, and special formats work correctly
+
+# Only commit and push if all checks pass AND visual inspection confirms correct rendering
 ```
 
 ## Package Structure

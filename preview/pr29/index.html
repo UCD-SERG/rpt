@@ -87,6 +87,24 @@
 <span><span class="co">## basic example code</span></span></code></pre></div>
 </div>
 <div class="section level2">
+<h2 id="development">Development<a class="anchor" aria-label="anchor" href="#development"></a>
+</h2>
+<div class="section level3">
+<h3 id="building-the-pkgdown-site">Building the pkgdown Site<a class="anchor" aria-label="anchor" href="#building-the-pkgdown-site"></a>
+</h3>
+<p>When building the pkgdown documentation site with <code><a href="https://pkgdown.r-lib.org/reference/build_site.html" class="external-link">pkgdown::build_site()</a></code>, the function needs to download external JavaScript and CSS dependencies from CDNs (Content Delivery Networks). If you’re working in a restricted network environment, you’ll need to ensure access to the following CDNs:</p>
+<ul>
+<li>
+<code>https://cdnjs.cloudflare.com/</code> - For headroom.js (sticky header functionality)</li>
+<li>
+<code>https://cdn.jsdelivr.net/</code> - For bootstrap-toc.js (table of contents) and other Bootstrap dependencies</li>
+</ul>
+<p>Without access to these CDNs, <code><a href="https://pkgdown.r-lib.org/reference/build_site.html" class="external-link">pkgdown::build_site()</a></code> will fail with errors like:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a>Error<span class="sc">:</span> cannot open URL <span class="st">'https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js'</span></span></code></pre></div>
+<p>These dependencies are automatically cached after the first download, so subsequent builds will be faster and won’t require network access unless the cache is cleared.</p>
+</div>
+</div>
+<div class="section level2">
 <h2 id="other-r-package-template-options">Other R Package Template Options<a class="anchor" aria-label="anchor" href="#other-r-package-template-options"></a>
 </h2>
 <p>If you’re looking for alternative R package templates, you may also want to consider:</p>
