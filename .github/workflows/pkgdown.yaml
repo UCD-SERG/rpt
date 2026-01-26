@@ -104,6 +104,7 @@ jobs:
 
       - name: Pre-render Quarto documents to all formats
         run: |
+          set -e
           Rscript pre-render-quarto.R
 
       - name: Deploy pkgdown site
