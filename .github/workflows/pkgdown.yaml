@@ -114,7 +114,14 @@ jobs:
           subdir <- "${{ env.subdir }}"
           pkg <- pkgdown::as_pkgdown(".")
 
-          # Deploy pkgdown site to branch
+          # Build the site but don't deploy yet
+          pkgdown::build_site(pkg, preview = FALSE, install = FALSE)
+          
+          # Post-process to add format links
+          cat("Adding RevealJS format links to articles...\n")
+          source(".github/scripts/add-format-links.R")
+          
+          # Now deploy with the modified files
           pkgdown::deploy_to_branch(subdir = if (nzchar(subdir)) subdir, clean = nzchar(subdir))
 
           # Report deployed site URL
