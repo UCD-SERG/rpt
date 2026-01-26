@@ -1,0 +1,10 @@
+{
+  "vignettes/articles/quarto_article.qmd": {
+    "quarto_article.html": "14646109",
+    "quarto_article-revealjs.html": "d834f495"
+  },
+  "vignettes/quarto_vignette.qmd": {
+    "quarto_vignette.html": "34d31e48",
+    "quarto_vignette-revealjs.html": "d05a6254"
+  }
+}
