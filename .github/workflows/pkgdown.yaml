@@ -107,29 +107,61 @@ jobs:
           set -e
           Rscript .github/scripts/pre-render-quarto.R
 
-      - name: Deploy pkgdown site
-        id: deploy
+      - name: Build pkgdown site
+        id: build
         shell: Rscript {0}
         run: |
-          subdir <- "${{ env.subdir }}"
           pkg <- pkgdown::as_pkgdown(".")
-
-          # Build the site but don't deploy yet
+          # Build the site locally
           pkgdown::build_site(pkg, preview = FALSE, install = FALSE)
-          
-          # Post-process to add format links
-          cat("Adding RevealJS format links to articles...\n")
-          status <- system("Rscript .github/scripts/add-format-links.R")
-          if (status != 0) {
-            stop("Failed to add format links")
-          }
-          
-          # Now deploy with the modified files
-          pkgdown::deploy_to_branch(subdir = if (nzchar(subdir)) subdir, clean = nzchar(subdir))
 
+      - name: Post-process to add RevealJS format links
+        run: |
+          set -e
+          Rscript .github/scripts/add-format-links.R
+
+      - name: Deploy to GitHub Pages
+        id: deploy
+        run: |
+          set -e
+          
+          # Determine subdirectory
+          subdir="${{ env.subdir }}"
+          
+          # Configure git
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          
+          # Checkout gh-pages branch
+          git fetch origin gh-pages:gh-pages || git checkout --orphan gh-pages
+          git checkout gh-pages
+          
+          # Clean the subdirectory if it exists
+          if [ -n "$subdir" ]; then
+            rm -rf "$subdir" || true
+            mkdir -p "$subdir"
+            # Copy docs to subdirectory
+            cp -r docs/* "$subdir/"
+          else
+            # Clean root and copy docs
+            git rm -rf . || true
+            cp -r docs/* .
+          fi
+          
+          # Commit and push
+          git add .
+          git commit -m "Built site for rpt@$(git rev-parse --short HEAD): $(date -u +%Y-%m-%d)" || echo "No changes to commit"
+          git push origin gh-pages
+          
+          # Switch back to original branch
+          git checkout -
+          
           # Report deployed site URL
-          deployed_url <- file.path(pkg$meta$url, subdir)
-          cat(sprintf('url=%s', deployed_url), file = Sys.getenv("GITHUB_OUTPUT"), append = TRUE)
+          if [ -n "$subdir" ]; then
+            echo "url=https://ucd-serg.github.io/rpt/$subdir" >> $GITHUB_OUTPUT
+          else
+            echo "url=https://ucd-serg.github.io/rpt/" >> $GITHUB_OUTPUT
+          fi
 
       - name: Notify pkgdown deployment
         if: github.event_name == 'pull_request'
