@@ -102,6 +102,10 @@ jobs:
         run: |
           echo "Subdir is set to: ${{ env.subdir }}"
 
+      - name: Pre-render Quarto documents to all formats
+        run: |
+          Rscript pre-render-quarto.R
+
       - name: Deploy pkgdown site
         id: deploy
         shell: Rscript {0}
