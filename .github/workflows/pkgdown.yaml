@@ -119,7 +119,10 @@ jobs:
           
           # Post-process to add format links
           cat("Adding RevealJS format links to articles...\n")
-          source(".github/scripts/add-format-links.R")
+          status <- system("Rscript .github/scripts/add-format-links.R")
+          if (status != 0) {
+            stop("Failed to add format links")
+          }
           
           # Now deploy with the modified files
           pkgdown::deploy_to_branch(subdir = if (nzchar(subdir)) subdir, clean = nzchar(subdir))
