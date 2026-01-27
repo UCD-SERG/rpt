@@ -4,6 +4,7 @@ Callouts
 CodeFactor
 Codecov
 Lifecycle
+RevealJS
 Tabsets
 ackage
 altdoc
@@ -16,5 +17,6 @@ foldable
 frac
 js
 mc
+pkgdown
 tabset
 toc
