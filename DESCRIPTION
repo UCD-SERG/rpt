@@ -1,6 +1,6 @@
 Package: rpt
 Title: What the Package Does (One Line, Title Case)
-Version: 0.0.0.9004
+Version: 0.0.0.9006
 Authors@R: c(
     person("First", "Last", , "first.last@example.com", role = c("aut", "cre"))
   )
@@ -22,6 +22,7 @@ Suggests:
     spelling,
     testthat (>= 3.0.0),
     withr,
-    quarto
+    quarto,
+    bslib
 Config/testthat/edition: 3
 VignetteBuilder: knitr, quarto
