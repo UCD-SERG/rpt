@@ -146,6 +146,35 @@ The template includes these workflows:
 - **R-check-docs**: Ensures documentation is up to date
 - **copilot-setup-steps**: Configures GitHub Copilot environment
 
+### pkgdown PR Preview Comments
+
+The **pkgdown** workflow automatically posts a comment on pull requests with a link to the preview documentation. This comment behavior can be configured in `.github/workflows/pkgdown.yaml`:
+
+**Current configuration** (recommended):
+```yaml
+- name: Notify pkgdown deployment
+  uses: hasura/comment-progress@v2.2.0
+  with:
+    id: pkgdown-deploy
+    recreate: true  # Deletes old comment and creates new one at bottom of PR
+```
+
+**Alternative options:**
+
+1. **`recreate: true`** (current setting):
+   - Deletes any existing preview comment
+   - Creates a new comment at the bottom of the PR conversation
+   - Ensures the preview link is always visible and never gets hidden in collapsed sections
+   - Best for: Keeping preview easily accessible in long PR conversations
+
+2. **`append: false`** (previous setting):
+   - Updates the existing comment in place
+   - Comment stays at its original position in the conversation
+   - May get hidden when GitHub collapses old comments in long threads
+   - Best for: Minimal comment clutter, but preview may become hard to find
+
+Choose `recreate: true` if you want the preview link to always be visible at the end of the PR conversation, or `append: false` if you prefer to minimize the number of comments and don't mind searching for the preview link.
+
 ## Best Practices
 
 1. **Follow the tidyverse style guide**: Use `styler::style_pkg()` to format code
