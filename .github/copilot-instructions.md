@@ -126,6 +126,24 @@ altdoc::render_docs()     # Build documentation site to verify documentation
   - Use `@username` to credit **external** contributors only (not internal team members)
   - See [R Packages - NEWS.md](https://r-pkgs.org/other-markdown.html#sec-news) for details
 
+## Version Management
+
+**CRITICAL**: Always keep the development version ahead of the main branch version.
+
+- When working on a development branch, ensure the version in `DESCRIPTION` is higher than the version on `main`
+- Use the fourth component for development versions (e.g., `0.1.0.9000` for development following `0.1.0` release)
+- Before merging to `main`, update to a release version (e.g., `0.1.1`, `0.2.0`, etc.)
+- After merging a release to `main`, immediately bump the development version on the development branch
+
+### Version Numbering Guidelines
+
+- **Major version** (X.0.0): Breaking changes, major new features
+- **Minor version** (0.X.0): New features, backward compatible
+- **Patch version** (0.0.X): Bug fixes, backward compatible
+- **Development version** (0.0.0.X): Development work, not released
+
+See [R Packages - Version numbers](https://r-pkgs.org/lifecycle.html#sec-lifecycle-version-number) for details.
+
 ## UCD-SERG Lab Manual
 
 Follow the guidance provided in the [UCD-SERG Lab Manual](https://ucd-serg.github.io/lab-manual/). The corresponding source files are available at [github.com/UCD-SERG/lab-manual](https://github.com/UCD-SERG/lab-manual) if easier to read.
