@@ -164,6 +164,9 @@ jobs:
           fi
 
       - name: Notify pkgdown deployment
+        # Uses sticky-pull-request-comment with recreate: true to ensure
+        # the preview comment is always visible at the bottom of the PR,
+        # preventing it from being hidden in collapsed sections
         if: github.event_name == 'pull_request'
         uses: marocchino/sticky-pull-request-comment@v2
         with:
