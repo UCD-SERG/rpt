@@ -103,6 +103,10 @@ jobs:
         run: |
           set -e
           
+          # Save current branch name
+          CURRENT_BRANCH=$(git rev-parse --abbrev-ref HEAD)
+          CURRENT_SHA=$(git rev-parse HEAD)
+          
           # Determine subdirectory
           subdir="${{ env.subdir }}"
           
@@ -114,8 +118,13 @@ jobs:
           git config --local user.name "github-actions[bot]"
           
           # Checkout gh-pages branch
-          git fetch origin gh-pages:gh-pages || git checkout --orphan gh-pages
-          git checkout gh-pages
+          if git fetch origin gh-pages:gh-pages 2>/dev/null; then
+            git checkout gh-pages
+          else
+            # gh-pages doesn't exist, create it as orphan
+            git checkout --orphan gh-pages
+            git rm -rf . || true
+          fi
           
           # Handle deployment based on whether we're deploying to a subdirectory
           if [ -n "$subdir" ]; then
@@ -133,11 +142,14 @@ jobs:
           
           # Commit and push
           git add .
-          git commit -m "Built site for rpt@$(git rev-parse --short HEAD): $(date -u +%Y-%m-%d)" || echo "No changes to commit"
-          git push origin gh-pages
+          if git commit -m "Built site for rpt@${CURRENT_SHA:0:7}: $(date -u +%Y-%m-%d)"; then
+            git push origin gh-pages
+          else
+            echo "No changes to commit"
+          fi
           
           # Switch back to original branch
-          git checkout -
+          git checkout "$CURRENT_BRANCH"
           
           # Report deployed site URL
           if [ -n "$subdir" ]; then
