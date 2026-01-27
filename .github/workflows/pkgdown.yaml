@@ -217,5 +217,4 @@ jobs:
           repository: ${{ github.repository }}
           number: ${{ github.event.number }}
           id: pkgdown-deploy
-          message: |
-            _:closed_book: Preview documentation for this PR has been cleaned up._
+          delete: true
