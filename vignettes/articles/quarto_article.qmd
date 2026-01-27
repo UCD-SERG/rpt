@@ -4,10 +4,6 @@ author: "UC Davis Seroepidemiology Research Group (UCD-SERG)"
 date: "`r Sys.Date()`"
 format:
   html: default
-  revealjs:
-    output-file: quarto_article-revealjs.html
-pkgdown:
-  as_is: true
 ---
 
 ```{r}
@@ -27,7 +23,7 @@ library(rpt)
 
 ## Overview
 
-This article demonstrates advanced features of Quarto for pkgdown articles. Unlike vignettes, articles are only available on the pkgdown website and are not included in the package bundle.
+This article demonstrates advanced features of Quarto for package documentation. Unlike vignettes, articles are only available on the documentation website and are not included in the package bundle.
 
 ## When to Use Articles vs Vignettes
 
@@ -265,7 +261,7 @@ Click to expand this section for additional tips:
 
 ## Conclusion
 
-This article demonstrates the advanced capabilities of Quarto for creating rich, interactive documentation for R packages. The integration with pkgdown makes it easy to create professional package websites.
+This article demonstrates the advanced capabilities of Quarto for creating rich, interactive documentation for R packages.
 
 ## Learn More
 

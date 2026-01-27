@@ -16,7 +16,7 @@ This guide walks you through using this R package template to create your own pa
    - `.Rbuildignore`
    - `.gitignore`
    - `README.Rmd`
-   - `pkgdown/_pkgdown.yml`
+   - `altdoc/docsify.md` and `altdoc/docsify.html` (if needed)
    - `.github/CONTRIBUTING.md`
    - `.github/ISSUE_TEMPLATE/issue_template.md`
    - Rename `packagename.Rproj` to `yourpackage.Rproj`
@@ -136,7 +136,7 @@ The template includes these workflows:
 
 - **R-CMD-check**: Checks package on multiple platforms
 - **test-coverage**: Computes test coverage
-- **pkgdown**: Builds and deploys documentation website
+- **altdoc**: Builds and deploys documentation website
 - **check-readme**: Ensures README.md is up to date
 - **check-spelling**: Checks spelling in documentation
 - **lint-changed-files**: Lints code in pull requests
@@ -169,12 +169,13 @@ Add dependencies to DESCRIPTION:
 - **Suggests**: Optional packages (for tests, vignettes)
 - **Depends**: Packages that must be attached (rarely needed)
 
-### Configuring pkgdown
+### Configuring altdoc
 
-Edit `pkgdown/_pkgdown.yml` to customize your documentation website:
-- Add/remove reference sections
-- Organize articles
-- Customize theme
+Customize your documentation website by editing files in `altdoc/`:
+- `docsify.md`: Configure sidebar and navigation
+- `docsify.html`: Customize theme and appearance
+- Build site locally: `pkgload::load_all(); altdoc::render_docs()`
+- Preview site: `altdoc::preview_docs()`
 
 ## Getting Help
 

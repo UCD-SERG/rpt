@@ -1,6 +1,8 @@
 # rpt (development version)
 
-* Added RevealJS presentation format for Quarto vignettes and articles in pkgdown documentation. HTML pages now display an "Other Formats" section with links to slide versions (#29)
+* Switched from pkgdown to altdoc for documentation generation. Now using docsify for a simpler, more lightweight documentation system.
+* Removed pkgdown-specific configurations and workflows.
+* Removed RevealJS multi-format support from Quarto vignettes as it was specific to pkgdown.
 
 # rpt 0.0.0.9000
 

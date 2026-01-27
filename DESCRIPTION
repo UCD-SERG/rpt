@@ -17,6 +17,7 @@ Depends:
 Imports: 
     stats
 Suggests: 
+    altdoc,
     knitr,
     rmarkdown,
     spelling,
