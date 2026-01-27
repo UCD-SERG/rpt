@@ -165,17 +165,14 @@ jobs:
 
       - name: Notify pkgdown deployment
         if: github.event_name == 'pull_request'
-        uses: hasura/comment-progress@v2.2.0
+        uses: marocchino/sticky-pull-request-comment@v2
         with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          repository: ${{ github.repository }}
-          number: ${{ github.event.number }}
-          id: pkgdown-deploy
-          append: false
-          message: >
-            :book: ${{ steps.deploy.outputs.url }}
+          header: pkgdown-deploy
+          recreate: true
+          message: |
+            :book: **Preview documentation:** ${{ steps.deploy.outputs.url }}
 
-            Preview documentation for this PR (at commit ${{ github.event.pull_request.head.sha }})
+            Preview for this PR (at commit ${{ github.event.pull_request.head.sha }})
 
   pkgdown-clean:
     if: ${{ github.event_name == 'pull_request' && github.event.action == 'closed' }}
@@ -208,11 +205,7 @@ jobs:
           fi
 
       - name: Notify pkgdown cleanup
-        uses: hasura/comment-progress@v2.2.0
+        uses: marocchino/sticky-pull-request-comment@v2
         with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          repository: ${{ github.repository }}
-          number: ${{ github.event.number }}
-          id: pkgdown-deploy
-          message: |
-            _:closed_book: Preview documentation for this PR has been cleaned up._
+          header: pkgdown-deploy
+          delete: true
