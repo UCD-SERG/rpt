@@ -44,6 +44,23 @@ library(rpt)
 ## basic example code
 ```
 
+## Development
+
+### Building the pkgdown Site
+
+When building the pkgdown documentation site with `pkgdown::build_site()`, the function needs to download external JavaScript and CSS dependencies from CDNs (Content Delivery Networks). If you're working in a restricted network environment, you'll need to ensure access to the following CDNs:
+
+- `https://cdnjs.cloudflare.com/` - For headroom.js (sticky header functionality)
+- `https://cdn.jsdelivr.net/` - For bootstrap-toc.js (table of contents) and other Bootstrap dependencies
+
+Without access to these CDNs, `pkgdown::build_site()` will fail with errors like:
+
+```
+Error: cannot open URL 'https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js'
+```
+
+These dependencies are automatically cached after the first download, so subsequent builds will be faster and won't require network access unless the cache is cleared.
+
 ## Other R Package Template Options
 
 If you're looking for alternative R package templates, you may also want to consider:

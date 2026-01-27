@@ -1,8 +1,10 @@
+CDNs
 CMD
 Callouts
 CodeFactor
 Codecov
 Lifecycle
+RevealJS
 Tabsets
 ackage
 callout
@@ -11,6 +13,8 @@ cdot
 emplate
 foldable
 frac
+js
 mc
 pkgdown
 tabset
+toc
