@@ -126,6 +126,10 @@ altdoc::render_docs()     # Build documentation site to verify documentation
   - Use `@username` to credit **external** contributors only (not internal team members)
   - See [R Packages - NEWS.md](https://r-pkgs.org/other-markdown.html#sec-news) for details
 
+## UCD-SERG Lab Manual
+
+Follow the guidance provided in the [UCD-SERG Lab Manual](https://ucd-serg.github.io/lab-manual/). The corresponding source files are available at [github.com/UCD-SERG/lab-manual](https://github.com/UCD-SERG/lab-manual) if easier to read.
+
 ## Continuous Integration
 
 The template includes GitHub Actions workflows for:
