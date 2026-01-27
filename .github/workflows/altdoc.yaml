@@ -106,6 +106,9 @@ jobs:
           # Determine subdirectory
           subdir="${{ env.subdir }}"
           
+          # Save the docs directory from the current branch
+          cp -r docs /tmp/docs-to-deploy
+          
           # Configure git
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
@@ -114,16 +117,18 @@ jobs:
           git fetch origin gh-pages:gh-pages || git checkout --orphan gh-pages
           git checkout gh-pages
           
-          # Clean the subdirectory if it exists
+          # Handle deployment based on whether we're deploying to a subdirectory
           if [ -n "$subdir" ]; then
+            # PR preview mode: only update the specific preview subdirectory
+            # DO NOT touch the root or other directories
             rm -rf "$subdir" || true
             mkdir -p "$subdir"
-            # Copy docs to subdirectory
-            cp -r docs/* "$subdir/"
+            cp -r /tmp/docs-to-deploy/* "$subdir/"
           else
-            # Clean root and copy docs
-            git rm -rf . || true
-            cp -r docs/* .
+            # Main branch or tag: update the root directory
+            # Clean everything except preview/ directory to preserve PR previews
+            find . -mindepth 1 -maxdepth 1 ! -name 'preview' ! -name '.git' -exec rm -rf {} +
+            cp -r /tmp/docs-to-deploy/* .
           fi
           
           # Commit and push
