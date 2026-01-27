@@ -156,7 +156,11 @@ jobs:
           fi
           
           # Add .nojekyll file to disable Jekyll processing
+          # If there's a docs directory, add it there too (for compatibility with existing setup)
           touch .nojekyll
+          if [ -d "docs" ]; then
+            touch docs/.nojekyll
+          fi
           
           # Commit and push
           git add .
