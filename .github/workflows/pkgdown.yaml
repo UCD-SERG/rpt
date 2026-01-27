@@ -156,8 +156,9 @@ jobs:
           fi
           
           # Add .nojekyll file to disable Jekyll processing
-          # If there's a docs directory, add it there too (for compatibility with existing setup)
+          # Place at root to cover standard deployment
           touch .nojekyll
+          # Also add to docs directory if it exists (GitHub Pages may be configured to serve from /docs)
           if [ -d "docs" ]; then
             touch docs/.nojekyll
           fi
