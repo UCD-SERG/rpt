@@ -144,7 +144,7 @@ jobs:
           repository: ${{ github.repository }}
           number: ${{ github.event.number }}
           id: altdoc-deploy
-          append: false
+          append: true
           message: >
             :book: ${{ steps.deploy.outputs.url }}
 

@@ -24,4 +24,5 @@ README.html
 
 /.quarto/
 altdoc/freeze.rds
-tests/spelling.Rout.save
+*.Rout.save
+*.Rout
