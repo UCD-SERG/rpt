@@ -148,6 +148,8 @@ jobs:
           fi
           
           # Switch back to original commit (works even in detached HEAD state)
+          # First, reset any uncommitted changes that might block checkout
+          git reset --hard HEAD
           git checkout "$CURRENT_SHA"
           
           # Report deployed site URL
