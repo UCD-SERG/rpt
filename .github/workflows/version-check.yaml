@@ -1,3 +1,4 @@
+# Workflow derived from https://github.com/RMI-PACTA/actions/blob/main/.github/workflows/R-semver-check.yml
 ---
 on:
   pull_request:
