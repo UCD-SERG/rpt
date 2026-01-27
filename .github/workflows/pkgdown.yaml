@@ -155,6 +155,9 @@ jobs:
             cp -r docs/* .
           fi
           
+          # Add .nojekyll file to disable Jekyll processing
+          touch .nojekyll
+          
           # Commit and push
           git add .
           git commit -m "Built site for rpt@$(git rev-parse --short HEAD): $(date -u +%Y-%m-%d)" || echo "No changes to commit"
