@@ -78,7 +78,7 @@ jobs:
             local::.
             r-lib/pkgdown
 
-      # If events is a PR, set subdir to 'preview/pr<pr_number>'
+      # If event is a PR, set subdir to 'preview/pr<pr_number>'
       - name: "[PR] Set documentation subdirectory"
         if: github.event_name == 'pull_request'
         run: |
@@ -97,6 +97,13 @@ jobs:
         if: github.event_name == 'workflow_dispatch'
         run: |
           echo "subdir=${{ github.event.inputs.tag }}" >> $GITHUB_ENV
+
+      # If event is a push to main (not a tag), set subdir to empty (deploy to root)
+      - name: "[main] Set documentation subdirectory to root"
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        run: |
+          echo "PKGDOWN_DEV_MODE=release" >> $GITHUB_ENV
+          echo "subdir=" >> $GITHUB_ENV
 
       - name: Debug subdir
         run: |
