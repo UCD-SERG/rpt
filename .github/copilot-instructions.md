@@ -41,6 +41,8 @@ For example:
 
 This ensures that package versions remain unique across branches and prevents version conflicts.
 
+**Before finishing each coding session**: Fetch the main branch and increment the development version if your branch is not ahead of main, before committing and requesting review again.
+
 ## Development Workflow
 
 ### Building and Checking

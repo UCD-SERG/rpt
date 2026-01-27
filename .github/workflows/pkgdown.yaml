@@ -109,10 +109,6 @@ jobs:
         run: |
           echo "Subdir is set to: ${{ env.subdir }}"
 
-      - name: Install Chromium for Quarto diagrams
-        run: |
-          quarto install chromium --no-prompt
-
       - name: Pre-render Quarto documents to all formats
         run: |
           set -e

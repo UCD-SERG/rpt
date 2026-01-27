@@ -222,6 +222,7 @@ print(result) # <4>
 3. Apply the example function from the package
 4. Display the results
 
+::: {.content-visible when-format="html"}
 ## Diagrams with Mermaid
 
 ```{mermaid}
@@ -232,6 +233,7 @@ flowchart LR
     C --> D[Output Results]
     D --> E[Visualize]
 ```
+:::
 
 ## Mathematical Notation
 
