@@ -120,6 +120,10 @@ pkgdown::build_site()   # Build pkgdown site to verify documentation
 - Use roxygen2 for documentation
 - Include tests for all exported functions
 - Update NEWS.md for user-facing changes
+  - Use the `(#issue_number)` notation to link to issues (e.g., `(#123)`)
+  - Use the `(#PR_number)` notation to link to pull requests
+  - Use `@username` to credit contributors
+  - See [R Packages - NEWS.md](https://r-pkgs.org/other-markdown.html#sec-news) for details
 
 ## Continuous Integration
 
