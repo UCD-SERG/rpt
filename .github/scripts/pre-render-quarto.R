@@ -33,15 +33,34 @@ for (qmd_file in qmd_files) {
   formats_to_render <- c("html", "revealjs", "docx")
   
   for (format in formats_to_render) {
-    tryCatch({
-      # Render to specific format
-      quarto::quarto_render(qmd_file, output_format = format, quiet = FALSE)
-      cat(sprintf("Successfully rendered %s to %s\n", qmd_file, format))
-    }, error = function(e) {
-      error_msg <- sprintf("Error rendering %s to %s: %s", qmd_file, format, e$message)
-      cat(error_msg, "\n")
-      errors <<- c(errors, error_msg)
-    })
+    # Try up to 2 times in case of transient failures
+    max_attempts <- 2
+    attempt <- 1
+    success <- FALSE
+    
+    while (attempt <= max_attempts && !success) {
+      tryCatch({
+        if (attempt > 1) {
+          cat(sprintf("Retry attempt %d for %s to %s\n", attempt, qmd_file, format))
+          Sys.sleep(2)  # Small delay before retry
+        }
+        # Render to specific format
+        quarto::quarto_render(qmd_file, output_format = format, quiet = FALSE)
+        cat(sprintf("Successfully rendered %s to %s\n", qmd_file, format))
+        success <- TRUE
+      }, error = function(e) {
+        error_msg <- sprintf("Error rendering %s to %s (attempt %d): %s", qmd_file, format, attempt, e$message)
+        cat(error_msg, "\n")
+        if (attempt >= max_attempts) {
+          errors <<- c(errors, error_msg)
+        }
+        attempt <<- attempt + 1
+      })
+      
+      if (!success) {
+        attempt <- attempt + 1
+      }
+    }
   }
 }
 
