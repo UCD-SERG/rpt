@@ -1,3 +1,4 @@
 inst/doc
 vignettes/*.html
 vignettes/*.R
+README.md linguist-generated=true

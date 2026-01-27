@@ -1,19 +1,45 @@
 # Workflow derived from https://github.com/r-lib/actions/tree/v2/examples
 # Need help debugging build failures? Start at https://github.com/r-lib/actions#where-to-find-help
+# Deploys altdoc for Pull Requests, tags, and pushes to main branch
+# PRs are deployed to /preview/pr<number>/
+# Tags are deployed to /<tag>/
 on:
-  push:
-    branches: [main, master]
   pull_request:
-    branches: [main, master]
+    branches:
+      - main
+    types:
+      - opened
+      - reopened
+      - synchronize
+      - closed
+    paths:
+      - 'man/**'
+      - 'altdoc/**'
+      - 'vignettes/**'
+      - '_quarto.yml'
+      - '.github/workflows/altdoc.yaml'
+      - 'README.md'
+  push:
+    tags:
+      - 'v[0-9]+.[0-9]+.[0-9]+'         # build on version tags
+      - '!v[0-9]+.[0-9]+.[0-9]+.[0-9]+' # but not if version involves a dev component
+    branches:
+      - main
   release:
     types: [published]
   workflow_dispatch:
+    inputs:
+      tag:
+        description: Tag to deploy
+        required: false
+        default: ''
 
 name: altdoc
 
 jobs:
-  altdoc:
+  altdoc-build:
     runs-on: ubuntu-latest
+    if: ${{ !(github.event_name == 'pull_request' && github.event.action == 'closed') }}
     # Only restrict concurrency for non-PR jobs
     concurrency:
       group: altdoc-${{ github.event_name != 'pull_request' || github.run_id }}
@@ -35,6 +61,28 @@ jobs:
       - name: Dependencies
         run: ./run.sh install_all
 
+      # If event is a PR, set subdir to 'preview/pr<pr_number>'
+      - name: "[PR] Set documentation subdirectory"
+        if: github.event_name == 'pull_request'
+        run: |
+          echo "subdir=preview/pr${{ github.event.number }}" >> $GITHUB_ENV
+
+      # If event is a tag, set subdir to '<tag_name>'
+      - name: "[tag] Set documentation subdirectory"
+        if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags/v')
+        run: |
+          echo "subdir=${GITHUB_REF#refs/tags/}" >> $GITHUB_ENV
+
+      # If event is workflow_dispatch, set subdir to 'inputs.tag'
+      - name: '[dispatch] Set documentation subdirectory'
+        if: github.event_name == 'workflow_dispatch'
+        run: |
+          echo "subdir=${{ github.event.inputs.tag }}" >> $GITHUB_ENV
+
+      - name: Debug subdir
+        run: |
+          echo "Subdir is set to: ${{ env.subdir }}"
+
       - name: Build site
         run: |
           # If parallel = TRUE in render_docs()
@@ -45,10 +93,95 @@ jobs:
           altdoc::render_docs(parallel = FALSE, freeze = FALSE)
         shell: Rscript {0}
 
-      - name: Deploy to GitHub pages 🚀
-        if: github.event_name != 'pull_request'
-        uses: JamesIves/github-pages-deploy-action@v4
+      - name: Deploy to GitHub Pages
+        id: deploy
+        run: |
+          set -e
+          
+          # Determine subdirectory
+          subdir="${{ env.subdir }}"
+          
+          # Configure git
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          
+          # Checkout gh-pages branch
+          git fetch origin gh-pages:gh-pages || git checkout --orphan gh-pages
+          git checkout gh-pages
+          
+          # Clean the subdirectory if it exists
+          if [ -n "$subdir" ]; then
+            rm -rf "$subdir" || true
+            mkdir -p "$subdir"
+            # Copy docs to subdirectory
+            cp -r docs/* "$subdir/"
+          else
+            # Clean root and copy docs
+            git rm -rf . || true
+            cp -r docs/* .
+          fi
+          
+          # Commit and push
+          git add .
+          git commit -m "Built site for rpt@$(git rev-parse --short HEAD): $(date -u +%Y-%m-%d)" || echo "No changes to commit"
+          git push origin gh-pages
+          
+          # Switch back to original branch
+          git checkout -
+          
+          # Report deployed site URL
+          if [ -n "$subdir" ]; then
+            echo "url=https://ucd-serg.github.io/rpt/$subdir" >> $GITHUB_OUTPUT
+          else
+            echo "url=https://ucd-serg.github.io/rpt/" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Notify altdoc deployment
+        if: github.event_name == 'pull_request'
+        uses: hasura/comment-progress@v2.2.0
         with:
-          clean: false
-          branch: gh-pages
-          folder: docs
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          repository: ${{ github.repository }}
+          number: ${{ github.event.number }}
+          id: altdoc-deploy
+          append: false
+          message: >
+            :book: ${{ steps.deploy.outputs.url }}
+
+            Preview documentation for this PR (at commit ${{ github.event.pull_request.head.sha }})
+
+  altdoc-clean:
+    if: ${{ github.event_name == 'pull_request' && github.event.action == 'closed' }}
+    runs-on: ubuntu-latest
+    env:
+      GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: "gh-pages"
+
+      - name: Clean up PR Preview
+        run: |
+          git config --local user.name "$GITHUB_ACTOR"
+          git config --local user.email "$GITHUB_ACTOR@users.noreply.github.com"
+
+          preview_dir="preview/pr${{ github.event.pull_request.number }}"
+          if [ -d "$preview_dir" ]; then
+            git rm -r $preview_dir
+            git commit -m "Remove $preview_dir (GitHub Actions)" || echo 'No preview to remove'
+            git push origin || echo 'No preview to remove'
+          else
+            echo 'No preview to remove'
+          fi
+
+      - name: Notify altdoc cleanup
+        uses: hasura/comment-progress@v2.2.0
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          repository: ${{ github.repository }}
+          number: ${{ github.event.number }}
+          id: altdoc-deploy
+          message: |
+            _:closed_book: Preview documentation for this PR has been cleaned up._
