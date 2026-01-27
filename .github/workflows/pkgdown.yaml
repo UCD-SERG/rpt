@@ -115,7 +115,7 @@ jobs:
           # Build the site locally
           pkgdown::build_site(pkg, preview = FALSE, install = FALSE)
 
-      - name: Post-process to add RevealJS format links
+      - name: Post-process to add alternate format links
         run: |
           set -e
           Rscript .github/scripts/add-format-links.R

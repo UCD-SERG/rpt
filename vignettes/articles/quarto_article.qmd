@@ -6,6 +6,8 @@ format:
   html: default
   revealjs:
     output-file: quarto_article-revealjs.html
+  docx:
+    output-file: quarto_article.docx
 pkgdown:
   as_is: true
 ---

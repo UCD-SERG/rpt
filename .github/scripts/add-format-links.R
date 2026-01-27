@@ -1,12 +1,12 @@
 #!/usr/bin/env Rscript
 
 # Post-process pkgdown HTML files to add "Other Formats" links
-# This script adds links to RevealJS presentations in the pkgdown HTML output
+# This script adds links to RevealJS presentations and DOCX documents in the pkgdown HTML output
 
 cat("Adding format links to pkgdown articles...\n")
 cat(sprintf("Working directory: %s\n", getwd()))
 
-# Find all HTML files in docs/articles that have corresponding RevealJS versions
+# Find all HTML files in docs/articles that have corresponding alternate format versions
 # Exclude the RevealJS files themselves (those ending with -revealjs.html)
 html_files <- list.files(
   path = "docs/articles",
@@ -43,10 +43,17 @@ for (html_file in html_files) {
   # Check if there's a corresponding RevealJS file
   revealjs_file <- file.path("docs/articles", paste0(base_name, "-revealjs.html"))
   
-  cat(sprintf("Checking for RevealJS file: %s\n", revealjs_file))
+  # Check if there's a corresponding DOCX file
+  docx_file <- file.path("docs/articles", paste0(base_name, ".docx"))
   
-  if (!file.exists(revealjs_file)) {
-    cat(sprintf("  RevealJS file not found, skipping %s\n", basename(html_file)))
+  cat(sprintf("Checking for RevealJS file: %s\n", revealjs_file))
+  cat(sprintf("Checking for DOCX file: %s\n", docx_file))
+  
+  has_revealjs <- file.exists(revealjs_file)
+  has_docx <- file.exists(docx_file)
+  
+  if (!has_revealjs && !has_docx) {
+    cat(sprintf("  No alternate format files found, skipping %s\n", basename(html_file)))
     next
   }
   
@@ -55,14 +62,22 @@ for (html_file in html_files) {
   # Read the HTML content
   html_content <- readLines(html_file, warn = FALSE)
   
-  # Create the format link HTML
+  # Build the format links HTML
+  format_links <- character()
+  if (has_revealjs) {
+    format_links <- c(format_links, sprintf('<li><a href="%s-revealjs.html"><i class="bi bi-file-slides"></i>RevealJS</a></li>', base_name))
+  }
+  if (has_docx) {
+    format_links <- c(format_links, sprintf('<li><a href="%s.docx"><i class="bi bi-file-word"></i>Word</a></li>', base_name))
+  }
+  
   format_link_html <- sprintf('
 <div class="quarto-alternate-formats">
 <h2>Other Formats</h2>
 <ul>
-<li><a href="%s-revealjs.html"><i class="bi bi-file-slides"></i>RevealJS</a></li>
+%s
 </ul>
-</div>', base_name)
+</div>', paste(format_links, collapse = "\n"))
   
   # Find the location to insert the link (after the TOC, before main content)
   # Look for the nav closing tag or the main content div
@@ -99,7 +114,12 @@ for (html_file in html_files) {
     
     # Write the modified HTML back
     writeLines(html_content, html_file)
-    cat(sprintf("  Added RevealJS link to %s\n", basename(html_file)))
+    
+    # Report what was added
+    added_formats <- character()
+    if (has_revealjs) added_formats <- c(added_formats, "RevealJS")
+    if (has_docx) added_formats <- c(added_formats, "DOCX")
+    cat(sprintf("  Added %s link(s) to %s\n", paste(added_formats, collapse = " and "), basename(html_file)))
   } else {
     cat(sprintf("  Could not find insertion point in %s\n", basename(html_file)))
   }
