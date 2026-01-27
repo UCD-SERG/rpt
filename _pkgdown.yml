@@ -1,21 +1,20 @@
 url: https://ucd-serg.github.io/rpt/
 template:
   bootstrap: 5
-  light-switch: true
-
+  light-switch: yes
 development:
   mode: auto
-
 search:
-  exclude: ['preview/']
-  
+  exclude: preview/
 reference:
 - title: Example Functions
-  contents:
-  - example_function
-
+  contents: example_function
 articles:
 - title: Get started
   navbar: ~
   contents:
   - getting-started
+  - quarto_vignette
+- title: Advanced Topics
+  contents: articles/quarto_article
+

@@ -80,8 +80,11 @@ covr::package_coverage()
 2. **`devtools::document()`** - Generate/update documentation from roxygen2 comments
 3. **`devtools::test()`** - Run all test suites to ensure tests pass
 4. **`devtools::check()`** - Run R CMD check to validate package structure and compliance
+5. **`pkgdown::build_site()`** - **MANDATORY**: Build the full pkgdown website locally and inspect the output to ensure all documentation renders correctly, including vignettes, articles, and any special formats (e.g., RevealJS presentations)
 
 These commands must be run in this order and all must pass without errors before pushing changes or requesting code review. This ensures that CI/CD workflows will pass and prevents wasting reviewer time on fixable issues.
+
+**IMPORTANT**: For changes affecting documentation or vignettes, you MUST build and visually inspect the pkgdown site output (located in `docs/`) to verify that everything renders as expected. This is especially critical for multi-format documents or custom output formats.
 
 ### Example Validation Workflow
 
@@ -91,8 +94,13 @@ devtools::document()    # Update documentation
 devtools::test()        # Verify all tests pass
 devtools::check()       # Run full package check
 lintr::lint_package()   # Verify code style
+pkgdown::build_site()   # Build pkgdown site to verify documentation
 
-# Only commit and push if all checks pass
+# Manually inspect docs/ directory to verify rendering
+# Check docs/articles/*.html for correct output
+# Verify links, images, and special formats work correctly
+
+# Only commit and push if all checks pass AND visual inspection confirms correct rendering
 ```
 
 ## Package Structure
@@ -112,6 +120,47 @@ lintr::lint_package()   # Verify code style
 - Use roxygen2 for documentation
 - Include tests for all exported functions
 - Update NEWS.md for user-facing changes
+  - Use the `(#issue_number)` notation to link to issues (e.g., `(#123)`)
+  - Use the `(#PR_number)` notation to link to pull requests
+  - Use `@username` to credit **external** contributors only (not internal team members)
+  - See [R Packages - NEWS.md](https://r-pkgs.org/other-markdown.html#sec-news) for details
+
+### Using Pipes to Emphasize Primary Inputs
+
+Use pipes (`|>` or `%>%`) to emphasize the primary input and make sequences of actions more readable:
+
+- **Use pipes for sequences**: When applying multiple transformations to a single primary object (typically a data frame), use pipes to show the flow of data through the transformations
+- **Emphasize the main subject**: Pipes keep the focus on the primary input by placing it at the start of the pipeline
+- **Avoid for multiple objects**: Don't use pipes when multiple unrelated objects are involved; use direct function calls or intermediate variables instead
+- **Formatting**: 
+  - Add a space before the pipe operator
+  - Place each step on a new line for multi-step pipelines
+  - Indent continuation lines for clarity
+
+**Example:**
+
+```r
+# Good: Pipe emphasizes the primary input (iris) and the sequence of transformations
+iris |>
+  summarize(across(where(is.numeric), mean), .by = Species) |>
+  pivot_longer(!Species, names_to = "measure", values_to = "value") |>
+  arrange(value)
+
+# Less clear: Nested functions obscure the flow
+arrange(
+  pivot_longer(
+    summarize(iris, across(where(is.numeric), mean), .by = Species),
+    !Species, names_to = "measure", values_to = "value"
+  ),
+  value
+)
+```
+
+For more details, see the [tidyverse style guide on pipes](https://style.tidyverse.org/pipes.html).
+
+## UCD-SERG Lab Manual
+
+Follow the guidance provided in the [UCD-SERG Lab Manual](https://ucd-serg.github.io/lab-manual/). The corresponding source files are available at [github.com/UCD-SERG/lab-manual](https://github.com/UCD-SERG/lab-manual) if easier to read.
 
 ## Continuous Integration
 
