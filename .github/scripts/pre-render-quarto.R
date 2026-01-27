@@ -27,15 +27,22 @@ if (length(qmd_files) == 0) {
 errors <- character()
 for (qmd_file in qmd_files) {
   cat(sprintf("Rendering %s...\n", qmd_file))
-  tryCatch({
-    # Render to all formats specified in the document YAML
-    quarto::quarto_render(qmd_file, output_format = "all", quiet = FALSE)
-    cat(sprintf("Successfully rendered %s\n", qmd_file))
-  }, error = function(e) {
-    error_msg <- sprintf("Error rendering %s: %s", qmd_file, e$message)
-    cat(error_msg, "\n")
-    errors <<- c(errors, error_msg)
-  })
+  
+  # Get the formats defined in the file's YAML
+  # We'll render each format separately to avoid hanging issues
+  formats_to_render <- c("html", "revealjs", "docx")
+  
+  for (format in formats_to_render) {
+    tryCatch({
+      # Render to specific format
+      quarto::quarto_render(qmd_file, output_format = format, quiet = FALSE)
+      cat(sprintf("Successfully rendered %s to %s\n", qmd_file, format))
+    }, error = function(e) {
+      error_msg <- sprintf("Error rendering %s to %s: %s", qmd_file, format, e$message)
+      cat(error_msg, "\n")
+      errors <<- c(errors, error_msg)
+    })
+  }
 }
 
 cat("Pre-rendering complete!\n")

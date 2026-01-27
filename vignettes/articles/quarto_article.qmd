@@ -222,7 +222,7 @@ print(result) # <4>
 3. Apply the example function from the package
 4. Display the results
 
-::: {.content-visible when-format="html"}
+::: {.content-visible unless-format="docx"}
 ## Diagrams with Mermaid
 
 ```{mermaid}
