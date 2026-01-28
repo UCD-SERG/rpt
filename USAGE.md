@@ -16,7 +16,7 @@ This guide walks you through using this R package template to create your own pa
    - `.Rbuildignore`
    - `.gitignore`
    - `README.Rmd`
-   - `altdoc/docsify.md` and `altdoc/docsify.html` (if needed)
+   - `altdoc/quarto_website.yml` (if needed for customization)
    - `.github/CONTRIBUTING.md`
    - `.github/ISSUE_TEMPLATE/issue_template.md`
    - Rename `packagename.Rproj` to `yourpackage.Rproj`
@@ -201,8 +201,7 @@ Add dependencies to DESCRIPTION:
 ### Configuring altdoc
 
 Customize your documentation website by editing files in `altdoc/`:
-- `docsify.md`: Configure sidebar and navigation
-- `docsify.html`: Customize theme and appearance
+- `quarto_website.yml`: Configure Quarto site settings, theme, sidebar, and navigation
 - Build site locally: `pkgload::load_all(); altdoc::render_docs()`
 - Preview site: `altdoc::preview_docs()`
 

@@ -133,7 +133,7 @@ jobs:
           fi
           
           # Ensure .nojekyll exists at root to prevent Jekyll processing
-          # This is critical for docsify to work (needs _sidebar.md file)
+          # This is critical for Quarto sites to work properly
           # Must be done BEFORE any cleanup operations
           touch .nojekyll
           

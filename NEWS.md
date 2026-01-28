@@ -1,6 +1,6 @@
 # rpt (development version)
 
-* Switched from pkgdown to altdoc for documentation generation. Now using docsify for a simpler, more lightweight documentation system.
+* Switched from pkgdown to altdoc for documentation generation. Now using Quarto Website for documentation with native math equation support via MathJax.
 * Removed pkgdown-specific configurations and workflows.
 * Retained RevealJS multi-format support for Quarto vignettes and articles.
 * Updated lintr configuration to match serodynamics reference with enhanced linter rules

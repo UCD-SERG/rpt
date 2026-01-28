@@ -16,7 +16,7 @@ Replace `packagename` with your actual package name in:
 - [ ] `.Rbuildignore` (2 instances)
 - [ ] `.gitignore` (3 instances)
 - [ ] `README.Rmd` (multiple instances)
-- [ ] `altdoc/docsify.md` and `altdoc/docsify.html` (if needed)
+- [ ] `altdoc/quarto_website.yml` (if needed for customization)
 - [ ] `.github/CONTRIBUTING.md`
 - [ ] `.github/ISSUE_TEMPLATE/issue_template.md`
 - [ ] `R/packagename-package.R` (rename file and update content)
@@ -74,9 +74,9 @@ Replace `packagename` with your actual package name in:
 
 ## Documentation Website
 
-- [ ] Customize `altdoc/docsify.md` and `altdoc/docsify.html` if desired
+- [ ] Customize `altdoc/quarto_website.yml` if desired (theme, sidebar, etc.)
 - [ ] Organize functions and vignettes in the altdoc sidebar
-- [ ] Customize theme if desired
+- [ ] Customize Quarto theme if desired
 - [ ] Build site locally: `pkgload::load_all(); altdoc::render_docs()`
 - [ ] Preview site locally: `altdoc::preview_docs()`
 

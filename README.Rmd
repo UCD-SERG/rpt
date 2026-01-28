@@ -48,7 +48,7 @@ library(rpt)
 
 ### Building the Documentation Site
 
-This package uses [altdoc](https://altdoc.etiennebacher.com/) with [docsify](https://docsify.js.org/) to build its documentation site. To build and preview the documentation locally:
+This package uses [altdoc](https://altdoc.etiennebacher.com/) with [Quarto](https://quarto.org/) to build its documentation site. To build and preview the documentation locally:
 
 ```r
 # Load the package
