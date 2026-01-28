@@ -81,10 +81,17 @@ covr::package_coverage()
 3. **`devtools::test()`** - Run all test suites to ensure tests pass
 4. **`devtools::check()`** - Run R CMD check to validate package structure and compliance
 5. **`altdoc::render_docs()`** - **MANDATORY**: Build the full documentation website locally and inspect the output to ensure all documentation renders correctly, including vignettes and articles
+6. **`altdoc::preview_docs()`** - **MANDATORY BEFORE REVIEW**: Launch local preview server and visually inspect the rendered documentation in a browser to verify:
+   - All equations render correctly (check for LaTeX math symbols, not raw text or HTML)
+   - All code blocks display properly with syntax highlighting
+   - All images and figures load correctly  
+   - All links work (internal and external)
+   - Navigation sidebar functions properly
+   - Search functionality works
 
 These commands must be run in this order and all must pass without errors before pushing changes or requesting code review. This ensures that CI/CD workflows will pass and prevents wasting reviewer time on fixable issues.
 
-**IMPORTANT**: For changes affecting documentation or vignettes, you MUST build and visually inspect the documentation site output (located in `docs/`) to verify that everything renders as expected.
+**IMPORTANT**: For changes affecting documentation or vignettes, you MUST build and visually inspect the documentation site output (located in `docs/`) to verify that everything renders as expected. **DO NOT REQUEST REVIEW** until you have personally verified the deployed documentation looks correct in a browser.
 
 ### Example Validation Workflow
 
@@ -98,6 +105,20 @@ pkgload::load_all()       # Load the package
 altdoc::render_docs()     # Build documentation site to verify documentation
 
 # Manually inspect docs/ directory to verify rendering
+# Check docs/vignettes/*.md for correct output
+# Verify links and images work correctly
+
+# CRITICAL: Preview the site in a browser before requesting review
+altdoc::preview_docs()    # Launch preview server
+# Open browser and visually verify:
+# - Math equations render (not raw LaTeX or HTML)
+# - Code blocks have syntax highlighting
+# - All images display
+# - Navigation works
+# - Search works
+
+# Only commit and push if all checks pass AND visual inspection confirms correct rendering
+```
 # Check docs/vignettes/*.md for correct output
 # Verify links and images work correctly
 
