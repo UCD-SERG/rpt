@@ -116,6 +116,11 @@ jobs:
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
           
+          # Reset any changes from the build process before switching branches
+          # altdoc::render_docs() modifies .Rbuildignore and altdoc/pkgdown.yml
+          git reset --hard HEAD
+          git clean -fd
+          
           # Checkout gh-pages branch
           if git fetch origin gh-pages:gh-pages 2>/dev/null; then
             git checkout gh-pages
@@ -148,8 +153,6 @@ jobs:
           fi
           
           # Switch back to original commit (works even in detached HEAD state)
-          # First, reset any uncommitted changes that might block checkout
-          git reset --hard HEAD
           git checkout "$CURRENT_SHA"
           
           # Report deployed site URL
