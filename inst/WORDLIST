@@ -3,7 +3,11 @@ CMD
 Callouts
 CodeFactor
 Codecov
+KaTeX
 Lifecycle
+MathJax
+Quarto
+RSPM
 RevealJS
 Tabsets
 ackage
@@ -20,6 +24,7 @@ linter
 lintr
 mc
 pkgdown
+quarto
 serodynamics
 tabset
 toc
