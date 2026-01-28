@@ -118,11 +118,32 @@ jobs:
         id: build
         shell: Rscript {0}
         run: |
+          # Build the site (Quarto articles are not in _pkgdown.yml to prevent pkgdown from rendering them)
           pkg <- pkgdown::as_pkgdown(".")
-          # Build the site locally
           pkgdown::build_site(pkg, preview = FALSE, install = FALSE)
+          
+          # Copy pre-rendered Quarto HTML files and alternate formats to docs/articles
+          quarto_files <- c(
+            "vignettes/quarto_vignette.html",
+            "vignettes/articles/quarto_article.html"
+          )
+          for (src in quarto_files) {
+            if (file.exists(src)) {
+              dest <- file.path("docs/articles", basename(src))
+              file.copy(src, dest, overwrite = TRUE)
+              cat("Copied:", src, "to", dest, "\n")
+            }
+          }
+          
+          # Copy alternate format files (RevealJS and DOCX)
+          alt_files <- list.files("vignettes", pattern = "(-revealjs\\.html|\\.docx)$", full.names = TRUE, recursive = TRUE)
+          for (src in alt_files) {
+            dest <- file.path("docs/articles", basename(src))
+            file.copy(src, dest, overwrite = TRUE)
+            cat("Copied alternate format:", src, "to", dest, "\n")
+          }
 
-      - name: Post-process to add RevealJS format links
+      - name: Post-process to add alternate format links
         run: |
           set -e
           Rscript .github/scripts/add-format-links.R

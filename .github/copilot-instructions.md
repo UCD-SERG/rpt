@@ -31,6 +31,18 @@ The repository includes a `.github/workflows/copilot-setup-steps.yml` workflow t
 6. Run `devtools::document()` to generate documentation
 7. Run `devtools::check()` to validate your package
 
+## Version Management
+
+**CRITICAL**: When creating a new branch or PR from main, ALWAYS increment the development version number in the DESCRIPTION file to one version past the current main branch version.
+
+For example:
+- If main branch has version `0.0.0.9005`
+- Your new branch MUST have version `0.0.0.9006`
+
+This ensures that package versions remain unique across branches and prevents version conflicts.
+
+**Before finishing each coding session**: Fetch the main branch and increment the development version if your branch is not ahead of main, before committing and requesting review again.
+
 ## Development Workflow
 
 ### Building and Checking

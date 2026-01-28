@@ -4,6 +4,8 @@ format:
   html: default
   revealjs:
     output-file: quarto_vignette-revealjs.html
+  docx:
+    output-file: quarto_vignette.docx
 pkgdown:
   as_is: true
 vignette: >
