@@ -1,6 +1,10 @@
 project:
   type: website
   output-dir: ../docs/
+  render:
+    - "*.qmd"
+    - "*.md"
+    - "!preview/"
 
 # Note: freeze functionality can be set at a project level or for individual .qmd files
 # execute:
@@ -20,8 +24,9 @@ website:
     contents:
       - text: Home
         file: index.md
-      - section: $ALTDOC_VIGNETTE_BLOCK
-      - section: Articles
+      - section: Get started
+        contents: $ALTDOC_VIGNETTE_BLOCK
+      - section: Advanced Topics
         contents: $ALTDOC_ARTICLE_BLOCK
       - section: $ALTDOC_MAN_BLOCK
       - text: News
@@ -40,5 +45,7 @@ website:
 format:
   html:
     code-link: true
-#     theme: cosmo
+    theme:
+      light: cosmo
+      dark: darkly
 #     number-sections: false
