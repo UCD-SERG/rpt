@@ -143,6 +143,38 @@ altdoc::render_docs()     # Build documentation site to verify documentation
 - **Development version** (0.0.0.X): Development work, not released
 
 See [R Packages - Version numbers](https://r-pkgs.org/lifecycle.html#sec-lifecycle-version-number) for details.
+### Using Pipes to Emphasize Primary Inputs
+
+Use pipes (`|>` or `%>%`) to emphasize the primary input and make sequences of actions more readable:
+
+- **Use pipes for sequences**: When applying multiple transformations to a single primary object (typically a data frame), use pipes to show the flow of data through the transformations
+- **Emphasize the main subject**: Pipes keep the focus on the primary input by placing it at the start of the pipeline
+- **Avoid for multiple objects**: Don't use pipes when multiple unrelated objects are involved; use direct function calls or intermediate variables instead
+- **Formatting**: 
+  - Add a space before the pipe operator
+  - Place each step on a new line for multi-step pipelines
+  - Indent continuation lines for clarity
+
+**Example:**
+
+```r
+# Good: Pipe emphasizes the primary input (iris) and the sequence of transformations
+iris |>
+  summarize(across(where(is.numeric), mean), .by = Species) |>
+  pivot_longer(!Species, names_to = "measure", values_to = "value") |>
+  arrange(value)
+
+# Less clear: Nested functions obscure the flow
+arrange(
+  pivot_longer(
+    summarize(iris, across(where(is.numeric), mean), .by = Species),
+    !Species, names_to = "measure", values_to = "value"
+  ),
+  value
+)
+```
+
+For more details, see the [tidyverse style guide on pipes](https://style.tidyverse.org/pipes.html).
 
 ## UCD-SERG Lab Manual
 

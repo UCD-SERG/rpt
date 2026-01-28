@@ -14,6 +14,7 @@
 ^\.github$
 ^LICENSE\.md$
 ^\.lintr$
+^\.lintr\.R$
 ^_quarto\.yml$
 ^\.quarto$
 ^vignettes/\.quarto$
