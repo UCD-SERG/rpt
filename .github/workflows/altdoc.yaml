@@ -134,6 +134,7 @@ jobs:
           
           # Ensure .nojekyll exists at root to prevent Jekyll processing
           # This is critical for docsify to work (needs _sidebar.md file)
+          # Must be done BEFORE any cleanup operations
           touch .nojekyll
           
           # Handle deployment based on whether we're deploying to a subdirectory
@@ -145,9 +146,11 @@ jobs:
             cp -r /tmp/docs-to-deploy/* "$subdir/"
           else
             # Main branch or tag: update the root directory
-            # Clean everything except preview/ directory to preserve PR previews
-            find . -mindepth 1 -maxdepth 1 ! -name 'preview' ! -name '.git' -exec rm -rf {} +
+            # Clean everything except preview/ directory, .git/, and .nojekyll to preserve PR previews
+            find . -mindepth 1 -maxdepth 1 ! -name 'preview' ! -name '.git' ! -name '.nojekyll' -exec rm -rf {} +
             cp -r /tmp/docs-to-deploy/* .
+            # Ensure .nojekyll is preserved (in case it was in docs and got overwritten)
+            touch .nojekyll
           fi
           
           # Commit and push
