@@ -23,3 +23,5 @@
 ^CODE_OF_CONDUCT\.md$
 ^USAGE\.md$
 ^TEMPLATE_INFO\.md$
+^altdoc$
+^_quarto$
