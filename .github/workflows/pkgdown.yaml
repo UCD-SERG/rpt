@@ -118,26 +118,36 @@ jobs:
         id: build
         shell: Rscript {0}
         run: |
-          pkg <- pkgdown::as_pkgdown(".")
-          # Build the site (this will skip Quarto articles since they're not in _pkgdown.yml)
-          pkgdown::build_site(pkg, preview = FALSE, install = FALSE)
+          # Temporarily move .qmd files so pkgdown doesn't try to render them
+          # (we already pre-rendered them)
+          temp_qmd_dir <- file.path(tempdir(), "qmd_files")
+          dir.create(temp_qmd_dir, showWarnings = FALSE, recursive = TRUE)
           
-          # Copy pre-rendered Quarto HTML files to docs/articles
-          quarto_html <- c(
-            "vignettes/quarto_vignette.html",
-            "vignettes/articles/quarto_article.html"
-          )
-          for (src in quarto_html) {
-            if (file.exists(src)) {
-              dest <- file.path("docs/articles", basename(src))
-              file.copy(src, dest, overwrite = TRUE)
-              cat("Copied pre-rendered:", src, "to", dest, "\n")
-            } else {
-              warning("Pre-rendered file not found:", src)
-            }
+          qmd_files <- list.files("vignettes", pattern = "\\.qmd$", full.names = TRUE, recursive = TRUE)
+          qmd_backup_paths <- character()
+          for (qmd_file in qmd_files) {
+            backup_path <- file.path(temp_qmd_dir, basename(dirname(qmd_file)), basename(qmd_file))
+            dir.create(dirname(backup_path), showWarnings = FALSE, recursive = TRUE)
+            file.copy(qmd_file, backup_path)
+            file.remove(qmd_file)
+            qmd_backup_paths <- c(qmd_backup_paths, backup_path)
+            cat("Moved:", qmd_file, "to", backup_path, "\n")
           }
           
-          # Also copy alternate format files (RevealJS and DOCX)
+          # Build the site (pkgdown will use pre-rendered HTML files)
+          pkg <- pkgdown::as_pkgdown(".")
+          pkgdown::build_site(pkg, preview = FALSE, install = FALSE)
+          
+          # Restore .qmd files
+          for (backup_path in qmd_backup_paths) {
+            relative_path <- sub(paste0("^", temp_qmd_dir, "/"), "", backup_path)
+            original_path <- file.path("vignettes", relative_path)
+            dir.create(dirname(original_path), showWarnings = FALSE, recursive = TRUE)
+            file.copy(backup_path, original_path)
+            cat("Restored:", original_path, "\n")
+          }
+          
+          # Copy alternate format files (RevealJS and DOCX) to docs/articles
           alt_files <- list.files("vignettes", pattern = "(-revealjs\\.html|\\.docx)$", full.names = TRUE, recursive = TRUE)
           for (src in alt_files) {
             dest <- file.path("docs/articles", basename(src))
