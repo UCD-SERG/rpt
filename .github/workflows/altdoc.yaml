@@ -132,6 +132,10 @@ jobs:
             git rm -rf . || true
           fi
           
+          # Ensure .nojekyll exists at root to prevent Jekyll processing
+          # This is critical for docsify to work (needs _sidebar.md file)
+          touch .nojekyll
+          
           # Handle deployment based on whether we're deploying to a subdirectory
           if [ -n "$subdir" ]; then
             # PR preview mode: only update the specific preview subdirectory
