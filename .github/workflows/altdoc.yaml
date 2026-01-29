@@ -52,3 +52,10 @@ jobs:
           clean: false
           branch: gh-pages
           folder: docs
+
+      - name: Deploy PR Preview
+        if: github.event_name = 'pull_request'
+        uses: rossjrw/pr-preview-action@main
+        with:
+          source-dir: ./docs/
+          pages-base-url: ucd-serg.github.io
