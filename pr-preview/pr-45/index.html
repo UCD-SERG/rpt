@@ -77,9 +77,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-ed96de9b727972fe78a7b5d16c58bf87.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-8fd1faf6fd93e4e6d207ae0f9db51d78.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark-e7f4145358ce1d0cd37d8d374dbb44f9.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="site_libs/bootstrap/bootstrap-8fd1faf6fd93e4e6d207ae0f9db51d78.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-df175dff5e0603d307760d170d784760.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-700321e9dc9119e5e0d8e5dad4aa54f3.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-df175dff5e0603d307760d170d784760.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -290,6 +290,31 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <span class="navbar-toggler-icon"></span>
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link active" href="./man/rpt-package.html" aria-current="page"> 
+<span class="menu-text">Documentation</span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-articles" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Articles</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-articles">    
+        <li>
+    <a class="dropdown-item" href="./vignettes/getting-started.html">
+ <span class="dropdown-text">Getting started</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./vignettes/quarto_vignette.html">
+ <span class="dropdown-text">Intro vignette</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./vignettes/articles/quarto_article.html">
+ <span class="dropdown-text">Advanced</span></a>
+  </li>  
+    </ul>
+  </li>
+</ul>
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item compact">
     <a class="nav-link" href="https://github.com/UCD-SERG/rpt"> <i class="bi bi-github" role="img" aria-label="rpt GitHub">
@@ -381,6 +406,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="menu-text">example_function</span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./man/rpt-package.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">rpt-package</span></a>
+  </div>
+</li>
       </ul>
   </li>
         <li class="sidebar-item">
@@ -417,19 +448,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#rpt-r-package-template" id="toc-rpt-r-package-template" class="nav-link active" data-scroll-target="#rpt-r-package-template"><span class="header-section-number">1</span> <code>{rpt}</code> (<u>R</u> <u>p</u>ackage <u>t</u>emplate)</a>
+  <li><a href="#rpt-r-package-template" id="toc-rpt-r-package-template" class="nav-link active" data-scroll-target="#rpt-r-package-template"><code>{rpt}</code> (<u>R</u> <u>p</u>ackage <u>t</u>emplate)</a>
   <ul class="collapse">
-  <li><a href="#installation" id="toc-installation" class="nav-link" data-scroll-target="#installation"><span class="header-section-number">1.1</span> Installation</a></li>
-  <li><a href="#example" id="toc-example" class="nav-link" data-scroll-target="#example"><span class="header-section-number">1.2</span> Example</a></li>
-  <li><a href="#development" id="toc-development" class="nav-link" data-scroll-target="#development"><span class="header-section-number">1.3</span> Development</a>
+  <li><a href="#installation" id="toc-installation" class="nav-link" data-scroll-target="#installation">Installation</a></li>
+  <li><a href="#example" id="toc-example" class="nav-link" data-scroll-target="#example">Example</a></li>
+  <li><a href="#development" id="toc-development" class="nav-link" data-scroll-target="#development">Development</a>
   <ul class="collapse">
-  <li><a href="#building-the-pkgdown-site" id="toc-building-the-pkgdown-site" class="nav-link" data-scroll-target="#building-the-pkgdown-site"><span class="header-section-number">1.3.1</span> Building the pkgdown Site</a></li>
+  <li><a href="#building-the-pkgdown-site" id="toc-building-the-pkgdown-site" class="nav-link" data-scroll-target="#building-the-pkgdown-site">Building the pkgdown Site</a></li>
   </ul></li>
-  <li><a href="#other-r-package-template-options" id="toc-other-r-package-template-options" class="nav-link" data-scroll-target="#other-r-package-template-options"><span class="header-section-number">1.4</span> Other R Package Template Options</a></li>
-  <li><a href="#code-of-conduct" id="toc-code-of-conduct" class="nav-link" data-scroll-target="#code-of-conduct"><span class="header-section-number">1.5</span> Code of Conduct</a></li>
+  <li><a href="#other-r-package-template-options" id="toc-other-r-package-template-options" class="nav-link" data-scroll-target="#other-r-package-template-options">Other R Package Template Options</a></li>
+  <li><a href="#code-of-conduct" id="toc-code-of-conduct" class="nav-link" data-scroll-target="#code-of-conduct">Code of Conduct</a></li>
   </ul></li>
   </ul>
-<div class="toc-actions"><ul><li><a href="https://github.com/UCD-SERG/rpt/edit/main/index.md" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/UCD-SERG/rpt/blob/main/index.md" class="toc-action"><i class="bi empty"></i>View source</a></li><li><a href="https://github.com/UCD-SERG/rpt/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
+<div class="toc-actions"><ul><li><a href="https://github.com/UCD-SERG/rpt/edit/main/index.md" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/UCD-SERG/rpt/blob/main/index.md" class="toc-action"><i class="bi empty"></i>View source</a></li><li><a href="https://github.com/UCD-SERG/rpt/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div><div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="index.docx"><i class="bi bi-file-word"></i>MS Word</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"></header>
@@ -439,27 +470,27 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
-<section id="rpt-r-package-template" class="level1" data-number="1">
-<h1 data-number="1"><span class="header-section-number">1</span> <code>{rpt}</code> (<u>R</u> <u>p</u>ackage <u>t</u>emplate)</h1>
+<section id="rpt-r-package-template" class="level1">
+<h1><code>{rpt}</code> (<u>R</u> <u>p</u>ackage <u>t</u>emplate)</h1>
 <!-- badges: start -->
 <p><a href="https://github.com/UCD-SERG/rpt/actions/workflows/R-CMD-check.yaml"><img src="https://github.com/UCD-SERG/rpt/actions/workflows/R-CMD-check.yaml/badge.svg" class="img-fluid" alt="R-CMD-check"></a> <a href="https://app.codecov.io/gh/ucd-serg/rpt"><img src="https://codecov.io/gh/ucd-serg/rpt/graph/badge.svg" class="img-fluid" alt="Codecov test coverage"></a> <a href="https://www.codefactor.io/repository/github/ucd-serg/rpt"><img src="https://www.codefactor.io/repository/github/ucd-serg/rpt/badge.png" class="img-fluid" alt="CodeFactor"></a> <a href="https://CRAN.R-project.org/package=rpt"><img src="https://www.r-pkg.org/badges/version/rpt.png" class="img-fluid" alt="CRAN status"></a> <a href="https://lifecycle.r-lib.org/articles/stages.html#experimental"><img src="https://img.shields.io/badge/lifecycle-experimental-orange.svg" class="img-fluid" alt="Lifecycle: experimental"></a> <!-- badges: end --></p>
 <p>The goal of <code>{rpt}</code> is to …</p>
-<section id="installation" class="level2" data-number="1.1">
-<h2 data-number="1.1" class="anchored" data-anchor-id="installation"><span class="header-section-number">1.1</span> Installation</h2>
+<section id="installation" class="level2">
+<h2 class="anchored" data-anchor-id="installation">Installation</h2>
 <p>You can install the development version of <code>{rpt}</code> from <a href="https://github.com/">GitHub</a> with:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages("pak")</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>pak<span class="sc">::</span><span class="fu">pak</span>(<span class="st">"UCD-SERG/rpt"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
-<section id="example" class="level2" data-number="1.2">
-<h2 data-number="1.2" class="anchored" data-anchor-id="example"><span class="header-section-number">1.2</span> Example</h2>
+<section id="example" class="level2">
+<h2 class="anchored" data-anchor-id="example">Example</h2>
 <p>This is a basic example which shows you how to solve a common problem:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rpt)</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="do">## basic example code</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
-<section id="development" class="level2" data-number="1.3">
-<h2 data-number="1.3" class="anchored" data-anchor-id="development"><span class="header-section-number">1.3</span> Development</h2>
-<section id="building-the-pkgdown-site" class="level3" data-number="1.3.1">
-<h3 data-number="1.3.1" class="anchored" data-anchor-id="building-the-pkgdown-site"><span class="header-section-number">1.3.1</span> Building the pkgdown Site</h3>
+<section id="development" class="level2">
+<h2 class="anchored" data-anchor-id="development">Development</h2>
+<section id="building-the-pkgdown-site" class="level3">
+<h3 class="anchored" data-anchor-id="building-the-pkgdown-site">Building the pkgdown Site</h3>
 <p>When building the pkgdown documentation site with <code>pkgdown::build_site()</code>, the function needs to download external JavaScript and CSS dependencies from CDNs (Content Delivery Networks). If you’re working in a restricted network environment, you’ll need to ensure access to the following CDNs:</p>
 <ul>
 <li><code>https://cdnjs.cloudflare.com/</code> - For headroom.js (sticky header functionality)</li>
@@ -470,15 +501,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>These dependencies are automatically cached after the first download, so subsequent builds will be faster and won’t require network access unless the cache is cleared.</p>
 </section>
 </section>
-<section id="other-r-package-template-options" class="level2" data-number="1.4">
-<h2 data-number="1.4" class="anchored" data-anchor-id="other-r-package-template-options"><span class="header-section-number">1.4</span> Other R Package Template Options</h2>
+<section id="other-r-package-template-options" class="level2">
+<h2 class="anchored" data-anchor-id="other-r-package-template-options">Other R Package Template Options</h2>
 <p>If you’re looking for alternative R package templates, you may also want to consider:</p>
 <ul>
 <li><a href="https://github.com/insightsengineering/r.pkg.template/">r.pkg.template</a> - A comprehensive R package template from Insights Engineering</li>
 </ul>
 </section>
-<section id="code-of-conduct" class="level2" data-number="1.5">
-<h2 data-number="1.5" class="anchored" data-anchor-id="code-of-conduct"><span class="header-section-number">1.5</span> Code of Conduct</h2>
+<section id="code-of-conduct" class="level2">
+<h2 class="anchored" data-anchor-id="code-of-conduct">Code of Conduct</h2>
 <p>Please note that the <code>{rpt}</code> project is released with a <a href="https://contributor-covenant.org/version/2/1/CODE_OF_CONDUCT.html">Contributor Code of Conduct</a>. By contributing to this project, you agree to abide by its terms.</p>
 
 
