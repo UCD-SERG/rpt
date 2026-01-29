@@ -53,7 +53,7 @@ jobs:
         uses: actions/cache@v4
         with:
           path: altdoc/freeze.rds
-          key: altdoc-freeze-${{ github.sha }}
+          key: altdoc-freeze-${{ hashFiles('vignettes/**/*.qmd', 'vignettes/**/*.Rmd', 'man/**/*.Rd') }}
           restore-keys: |
             altdoc-freeze-
 
