@@ -77,5 +77,4 @@ jobs:
         if: github.event_name == 'pull_request'
         uses: rossjrw/pr-preview-action@main
         with:
-          source-dir: ./docs/
-          pages-base-url: ucd-serg.github.io
+          source-dir: docs
