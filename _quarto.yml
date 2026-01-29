@@ -27,4 +27,5 @@ format:
     slide-level: 2
     reference-location: document
     # reference-doc: vignettes/articles/templates/Gates_template.pptx
+  docx: default
 bibliography: vignettes/references.bib

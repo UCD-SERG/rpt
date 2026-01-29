@@ -8,8 +8,11 @@ project:
 bibliography: vignettes/references.bib
 website:
   title: "$ALTDOC_PACKAGE_NAME"
+  repo-url: https://github.com/UCD-SERG/rpt
+  repo-actions: [edit, source, issue]
+  # search:
+  #   exclude: preview/
   navbar:
-    exclude: preview/
     right:
       - icon: github
         href: $ALTDOC_PACKAGE_URL_GITHUB
@@ -40,8 +43,6 @@ website:
         file: $ALTDOC_CODE_OF_CONDUCT
       - text: Citation
         file: $ALTDOC_CITATION
-      - text: Contributing
-        file: .github/Contributing.md
 
 format:
   html:
