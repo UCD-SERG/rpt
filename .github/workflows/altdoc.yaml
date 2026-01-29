@@ -65,7 +65,7 @@ jobs:
       - uses: r-lib/actions/setup-r-dependencies@v2
         with:
           extra-packages: |
-            any::altdoc
+            etiennebacher/altdoc
             any::downlit
             any::xml2
             any::pkgload
@@ -103,25 +103,25 @@ jobs:
         id: deploy
         run: |
           set -e
-          
+
           # Save current commit SHA (works in detached HEAD state too)
           CURRENT_SHA=$(git rev-parse HEAD)
-          
+
           # Determine subdirectory
           subdir="${{ env.subdir }}"
-          
+
           # Save the docs directory from the current branch
           cp -r docs /tmp/docs-to-deploy
-          
+
           # Configure git
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
-          
+
           # Reset any changes from the build process before switching branches
           # altdoc::render_docs() modifies .Rbuildignore and altdoc/pkgdown.yml
           git reset --hard HEAD
           git clean -fd
-          
+
           # Checkout gh-pages branch
           if git fetch origin gh-pages:gh-pages 2>/dev/null; then
             git checkout gh-pages
@@ -130,12 +130,12 @@ jobs:
             git checkout --orphan gh-pages
             git rm -rf . || true
           fi
-          
+
           # Ensure .nojekyll exists at root to prevent Jekyll processing
           # This is critical for Quarto sites to work properly
           # Must be done BEFORE any cleanup operations
           touch .nojekyll
-          
+
           # Handle deployment based on whether we're deploying to a subdirectory
           if [ -n "$subdir" ]; then
             # PR preview mode: only update the specific preview subdirectory
@@ -151,7 +151,7 @@ jobs:
             # Ensure .nojekyll is preserved (in case it was in docs and got overwritten)
             touch .nojekyll
           fi
-          
+
           # Commit and push
           git add .
           if git commit -m "Built site for rpt@${CURRENT_SHA:0:7}: $(date -u +%Y-%m-%d)"; then
@@ -159,10 +159,10 @@ jobs:
           else
             echo "No changes to commit"
           fi
-          
+
           # Switch back to original commit (works even in detached HEAD state)
           git checkout "$CURRENT_SHA"
-          
+
           # Report deployed site URL
           if [ -n "$subdir" ]; then
             echo "url=https://ucd-serg.github.io/rpt/$subdir" >> $GITHUB_OUTPUT
