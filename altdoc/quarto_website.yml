@@ -13,6 +13,7 @@ website:
   # search:
   #   exclude: preview/
   navbar:
+    search: true
     right:
       - icon: github
         href: $ALTDOC_PACKAGE_URL_GITHUB
