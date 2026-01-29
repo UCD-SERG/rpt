@@ -50,7 +50,7 @@ format:
     theme:
       light: default
       dark: darkly
-    css: styles.css
+    css: altdoc/styles.css
     number-sections: true
     toc: true
 
