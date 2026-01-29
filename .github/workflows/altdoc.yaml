@@ -38,6 +38,7 @@ jobs:
       group: altdoc-${{ github.event_name != 'pull_request' || github.run_id }}
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+      QUARTO_PROFILE: website  # Use website profile to only render HTML format
     permissions:
       contents: write
       pull-requests: write
@@ -45,6 +46,14 @@ jobs:
       - uses: actions/checkout@v4
 
       - uses: quarto-dev/quarto-actions/setup@v2
+
+      - name: Cache altdoc freeze file
+        uses: actions/cache@v4
+        with:
+          path: altdoc/freeze.rds
+          key: altdoc-freeze-${{ github.sha }}
+          restore-keys: |
+            altdoc-freeze-
 
       - name: Get Script
         run: curl -OLs https://eddelbuettel.github.io/r-ci/run.sh && chmod 0755 run.sh
@@ -63,7 +72,7 @@ jobs:
           install.packages(".", repos = NULL, type = "source")
           install.packages("pkgload")
           pkgload::load_all()
-          altdoc::render_docs(verbose = TRUE, parallel = FALSE, freeze = FALSE)
+          altdoc::render_docs(verbose = TRUE, parallel = FALSE, freeze = TRUE)
         shell: Rscript {0}
 
       # If event is a tag, set subdir to '<tag_name>'

@@ -1,0 +1,11 @@
+# Quarto profile for website builds (CI/CD)
+# This profile is activated by setting QUARTO_PROFILE=website
+# It overrides the default configuration to only render HTML format,
+# which significantly speeds up the build process
+format:
+  html:
+    number-sections: true
+    toc: true
+    html-math-method: mathjax
+    fig-cap-location: top
+    echo: false

@@ -1,0 +1,9 @@
+# Vignette metadata for website profile
+# Only render HTML format for faster CI builds
+format:
+  html:
+    number-sections: true
+    toc: true
+    html-math-method: mathjax
+    fig-cap-location: top
+    echo: false
