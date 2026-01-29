@@ -25,3 +25,5 @@
 ^TEMPLATE_INFO\.md$
 ^altdoc$
 ^_quarto$
+^CONTRIBUTING\.md$
+^vignettes/*_files$

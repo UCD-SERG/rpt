@@ -6,7 +6,6 @@
 on:
   pull_request:
     branches:
-      - main
     types:
       - opened
       - reopened
@@ -37,7 +36,7 @@ on:
 name: altdoc
 
 jobs:
-  altdoc-build:
+  docs-build:
     runs-on: ubuntu-latest
     if: ${{ !(github.event_name == 'pull_request' && github.event.action == 'closed') }}
     # Only restrict concurrency for non-PR jobs
@@ -67,6 +66,8 @@ jobs:
         with:
           extra-packages: |
             any::altdoc
+            any::downlit
+            any::xml2
             any::pkgload
           needs: website
 
@@ -95,7 +96,7 @@ jobs:
       - name: Build site
         run: |
           pkgload::load_all()
-          altdoc::render_docs(parallel = FALSE, freeze = FALSE)
+          altdoc::render_docs(verbose = TRUE, parallel = FALSE, freeze = FALSE)
         shell: Rscript {0}
 
       - name: Deploy to GitHub Pages
