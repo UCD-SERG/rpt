@@ -25,7 +25,7 @@ website:
       - text: Articles
         menu:
           - text: "Getting started"
-            file: vignettes/getting-started.qmd
+            file: vignettes/getting-started.Rmd
           - text: "Intro vignette"
             file: vignettes/quarto_vignette.qmd
           - text: "Advanced"
@@ -39,7 +39,7 @@ website:
       - section: Articles
         style: floating
         contents:
-          - vignettes/getting-started.qmd
+          - vignettes/getting-started.Rmd
           - vignettes/quarto_vignette.qmd
           - vignettes/articles/quarto_article.qmd
           - section: Advanced
