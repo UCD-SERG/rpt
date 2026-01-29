@@ -13,7 +13,9 @@ on:
       - 'pkgdown/**'
       - 'vignettes/**'
       - '_quarto.yml'
+      - '_quarto-website.yml'
       - '.github/workflows/pkgdown.yaml'
+      - '.github/workflows/altdoc.yaml'
       - 'Readme.md'
   push:
     tags:
@@ -38,7 +40,7 @@ jobs:
       group: altdoc-${{ github.event_name != 'pull_request' || github.run_id }}
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
-      QUARTO_PROFILE: website  # Use website profile to only render HTML format
+      QUARTO_PROFILE: website  # Use website profile to optimize rendering
     permissions:
       contents: write
       pull-requests: write
