@@ -60,8 +60,7 @@ jobs:
           # future::plan(future::multicore)
           install.packages(c("downlit", "xml2"))
           install.packages(".", repos = NULL, type = "source")
-          install.packages("devtools")
-          devtools::install_dev("etiennebacher/altdoc")
+          install.packages("pkgload")
           pkgload::load_all()
           altdoc::render_docs(verbose = TRUE, parallel = FALSE, freeze = FALSE)
         shell: Rscript {0}
