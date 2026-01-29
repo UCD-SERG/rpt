@@ -58,10 +58,9 @@ jobs:
         run: |
           # If parallel = TRUE in render_docs()
           # future::plan(future::multicore)
-          install.packages(c("downlit", "xml2"))
+          install.packages(c("downlit", "xml2", "remotes", "devtools"))
           install.packages(".", repos = NULL, type = "source")
-          install.packages("devtools")
-          devtools::install_dev("etiennebacher/altdoc")
+          remotes::install_remo("etiennebacher/altdoc")
           devtools::load_all()
           altdoc::render_docs(verbose = TRUE, parallel = FALSE, freeze = FALSE)
         shell: Rscript {0}
