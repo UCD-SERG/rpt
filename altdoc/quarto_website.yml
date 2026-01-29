@@ -14,16 +14,30 @@ website:
   #   exclude: preview/
   navbar:
     search: true
+    pinned: false
     right:
       - icon: github
         href: $ALTDOC_PACKAGE_URL_GITHUB
         aria-label: $ALTDOC_PACKAGE_NAME GitHub
+    left:
+      - text: Documentation
+        file: man/rpt-package.qmd
+      - text: Articles
+        menu:
+          - text: "Getting started"
+            file: vignettes/getting-started.Rmd
+          - text: "Intro vignette"
+            file: vignettes/quarto_vignette.qmd
+          - text: "Advanced"
+            file: vignettes/articles/quarto_article.qmd
   sidebar:
     collapse-level: 1
     contents:
       - text: Home
         file: index.md
+        style: floating
       - section: Articles
+        style: floating
         contents:
           - vignettes/getting-started.Rmd
           - vignettes/quarto_vignette.qmd
@@ -32,6 +46,7 @@ website:
             contents:
               - vignettes/articles/quarto_article.qmd
       - section: $ALTDOC_MAN_BLOCK
+        style: floating
       - text: News
         file: $ALTDOC_NEWS
       - text: Changelog
@@ -53,5 +68,11 @@ format:
       dark: darkly
     css: altdoc/styles.css
     number-sections: false
+    code-copy: true
+    code-overflow: scroll
+    title-block-style: none
     toc: true
+    grid:
+      sidebar-width: 340px
+      margin-width: 340px
 
