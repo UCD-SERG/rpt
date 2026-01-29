@@ -5,11 +5,11 @@ project:
 # Note: freeze functionality can be set at a project level or for individual .qmd files
 # execute:
 #   freeze: false
-
+bibliography: vignettes/references.bib
 website:
   title: "$ALTDOC_PACKAGE_NAME"
   navbar:
-    search: true
+    exclude: preview/
     right:
       - icon: github
         href: $ALTDOC_PACKAGE_URL_GITHUB
@@ -52,3 +52,4 @@ format:
     css: styles.css
     number-sections: true
     toc: true
+
