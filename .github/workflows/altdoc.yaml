@@ -13,7 +13,9 @@ on:
       - 'pkgdown/**'
       - 'vignettes/**'
       - '_quarto.yml'
+      - '_quarto-website.yml'
       - '.github/workflows/pkgdown.yaml'
+      - '.github/workflows/altdoc.yaml'
       - 'Readme.md'
   push:
     tags:
@@ -38,6 +40,7 @@ jobs:
       group: altdoc-${{ github.event_name != 'pull_request' || github.run_id }}
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+      QUARTO_PROFILE: website  # Use website profile to optimize rendering
     permissions:
       contents: write
       pull-requests: write
@@ -45,6 +48,14 @@ jobs:
       - uses: actions/checkout@v4
 
       - uses: quarto-dev/quarto-actions/setup@v2
+
+      - name: Cache altdoc freeze file
+        uses: actions/cache@v4
+        with:
+          path: altdoc/freeze.rds
+          key: altdoc-freeze-${{ hashFiles('vignettes/**/*.qmd', 'vignettes/**/*.Rmd', 'man/**/*.Rd') }}
+          restore-keys: |
+            altdoc-freeze-
 
       - name: Get Script
         run: curl -OLs https://eddelbuettel.github.io/r-ci/run.sh && chmod 0755 run.sh
@@ -63,7 +74,7 @@ jobs:
           install.packages(".", repos = NULL, type = "source")
           install.packages("pkgload")
           pkgload::load_all()
-          altdoc::render_docs(verbose = TRUE, parallel = FALSE, freeze = FALSE)
+          altdoc::render_docs(verbose = TRUE, parallel = FALSE, freeze = TRUE)
         shell: Rscript {0}
 
       # If event is a tag, set subdir to '<tag_name>'
