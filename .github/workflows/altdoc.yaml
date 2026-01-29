@@ -62,7 +62,7 @@ jobs:
           install.packages(".", repos = NULL, type = "source")
           install.packages("pkgload")
           pkgload::load_all()
-          altdoc::render_docs(parallel = FALSE, freeze = FALSE)
+          altdoc::render_docs(verbose = TRUE, parallel = FALSE, freeze = FALSE)
         shell: Rscript {0}
 
       # If event is a tag, set subdir to '<tag_name>'
