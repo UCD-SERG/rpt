@@ -12,7 +12,7 @@ on:
       - 'pkgdown/**'
       - 'vignettes/**'
       - '_quarto.yml'
-      - '.github/workflows/pkgdown.yaml'
+      - '.github/workflows/altdoc.yaml'
       - 'Readme.md'
   push:
     tags:
@@ -62,7 +62,7 @@ jobs:
           install.packages(".", repos = NULL, type = "source")
           install.packages("devtools")
           devtools::install_dev("etiennebacher/altdoc")
-          pkgload::load_all()
+          devtools::load_all()
           altdoc::render_docs(verbose = TRUE, parallel = FALSE, freeze = FALSE)
         shell: Rscript {0}
 
