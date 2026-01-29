@@ -144,7 +144,7 @@
     "href": "NEWS.html",
     "title": "rpt (development version)",
     "section": "",
-    "text": "rpt (development version)\n\nUpdated lintr configuration to match serodynamics reference with enhanced linter rules\nPR preview comments now use recreate: true to ensure they always appear at the bottom of the PR conversation, preventing them from being hidden in collapsed sections (#31)\nAdded RevealJS presentation format for Quarto vignettes and articles in pkgdown documentation. HTML pages now display an “Other Formats” section with links to slide versions (#29)\n\n\n\nrpt 0.0.0.9000\n\nInitial development version",
+    "text": "rpt (development version)\n\nSwitched from pkgdown to altdoc (#45)\nUpdated lintr configuration to match serodynamics reference with enhanced linter rules\nPR preview comments now use recreate: true to ensure they always appear at the bottom of the PR conversation, preventing them from being hidden in collapsed sections (#31)\nAdded RevealJS presentation format for Quarto vignettes and articles in pkgdown documentation. HTML pages now display an “Other Formats” section with links to slide versions (#29)\n\n\n\nrpt 0.0.0.9000\n\nInitial development version",
     "crumbs": [
       "News"
     ]
@@ -594,7 +594,7 @@
     "href": "CITATION.html",
     "title": "Citation",
     "section": "",
-    "text": "Citation\nTo cite package ‘rpt’ in publications use:\n\nLast F (????). rpt: What the Package Does (One Line, Title Case). R package version 0.0.0.9006, https://github.com/UCD-SERG/rpt.",
+    "text": "Citation\nTo cite package ‘rpt’ in publications use:\n\nLast F (????). rpt: What the Package Does (One Line, Title Case). R package version 0.0.0.9007, https://github.com/UCD-SERG/rpt.",
     "crumbs": [
       "Citation"
     ]
