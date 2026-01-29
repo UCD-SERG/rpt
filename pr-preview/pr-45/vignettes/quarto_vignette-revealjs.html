@@ -93,7 +93,27 @@
     code span.va { color: #111111; } /* Variable */
     code span.vs { color: #20794d; } /* VerbatimString */
     code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
-  </style>
+    /* CSS for citations */
+    div.csl-bib-body { }
+    div.csl-entry {
+      clear: both;
+      margin-bottom: 0em;
+    }
+    .hanging-indent div.csl-entry {
+      margin-left:2em;
+      text-indent:-2em;
+    }
+    div.csl-left-margin {
+      min-width:2em;
+      float:left;
+    }
+    div.csl-right-inline {
+      margin-left:2em;
+      padding-left:1em;
+    }
+    div.csl-indent {
+      margin-left: 2em;
+    }  </style>
   <link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto-534cd8e3a96973385dffff3f4709048d.css">
   <link href="../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
@@ -319,17 +339,25 @@ Table&nbsp;1: Comparison of R Markdown and Quarto
 <h2>Summary</h2>
 <p>Quarto vignettes provide a modern, feature-rich way to document R packages. They integrate seamlessly with pkgdown and offer enhanced capabilities for technical documentation.</p>
 </section>
-<section id="references" class="slide level2">
+<section id="references" class="slide level2 smaller scrollable">
 <h2>References</h2>
 <p>For more information, see:</p>
 <ul>
 <li><a href="https://quarto.org/">Quarto Documentation</a></li>
 <li><a href="https://quarto.org/docs/computations/r.html">Using Quarto with R</a></li>
-<li><span class="citation" data-cites="R-base">[@R-base]</span></li>
-<li><span class="citation" data-cites="R-rpt">[@R-rpt]</span></li>
+<li><span class="citation" data-cites="R-base">R Core Team (<a href="#/references" role="doc-biblioref" onclick="">2024</a>)</span></li>
+<li><span class="citation" data-cites="R-rpt">UCD-SERG (<a href="#/references" role="doc-biblioref" onclick="">2024</a>)</span></li>
 </ul>
 
 
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="ref-R-base" class="csl-entry" role="listitem">
+R Core Team. 2024. <em>R: A Language and Environment for Statistical Computing</em>. Vienna, Austria: R Foundation for Statistical Computing. <a href="https://www.R-project.org/">https://www.R-project.org/</a>.
+</div>
+<div id="ref-R-rpt" class="csl-entry" role="listitem">
+UCD-SERG. 2024. <em>Rpt: R Package Template</em>. <a href="https://github.com/UCD-SERG/rpt">https://github.com/UCD-SERG/rpt</a>.
+</div>
+</div>
 </section>
     </div>
   <div class="quarto-auto-generated-content" style="display: none;">
