@@ -8,7 +8,6 @@ project:
 
 website:
   title: "$ALTDOC_PACKAGE_NAME"
-  code-links: true
   navbar:
     search: true
     right:
@@ -16,7 +15,7 @@ website:
         href: $ALTDOC_PACKAGE_URL_GITHUB
         aria-label: $ALTDOC_PACKAGE_NAME GitHub
   sidebar:
-    collapse-level: 2
+    collapse-level: 1
     contents:
       - text: Home
         file: index.md
@@ -41,9 +40,15 @@ website:
         file: $ALTDOC_CODE_OF_CONDUCT
       - text: Citation
         file: $ALTDOC_CITATION
+      - text: Contributing
+        file: .github/Contributing.md
 
 format:
   html:
-    code-link: true
-#     theme: cosmo
-#     number-sections: false
+    code-link: false
+    theme:
+      light: default
+      dark: darkly
+    css: styles.css
+    number-sections: true
+    toc: true
