@@ -12,7 +12,7 @@ on:
       - 'pkgdown/**'
       - 'vignettes/**'
       - '_quarto.yml'
-      - '.github/workflows/pkgdown.yaml'
+      - '.github/workflows/altdoc.yaml'
       - 'Readme.md'
   push:
     tags:
