@@ -59,6 +59,7 @@ jobs:
         run: |
           # If parallel = TRUE in render_docs()
           # future::plan(future::multicore)
+          install.packages(c("downlit", "xml2"))
           install.packages(".", repos = NULL, type = "source")
           install.packages("pkgload")
           pkgload::load_all()
