@@ -16,11 +16,18 @@ website:
         href: $ALTDOC_PACKAGE_URL_GITHUB
         aria-label: $ALTDOC_PACKAGE_NAME GitHub
   sidebar:
-    collapse-level: 1
+    collapse-level: 2
     contents:
       - text: Home
         file: index.md
-      - section: $ALTDOC_VIGNETTE_BLOCK
+      - section: Articles
+        contents:
+          - vignettes/getting-started.Rmd
+          - vignettes/quarto_vignette.qmd
+          - vignettes/articles/quarto_article.qmd
+          - section: Advanced
+            contents:
+              - vignettes/articles/quarto_article.qmd
       - section: $ALTDOC_MAN_BLOCK
       - text: News
         file: $ALTDOC_NEWS
