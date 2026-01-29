@@ -1,0 +1,16 @@
+---
+title: "test 123"
+vignette: >
+  %\VignetteIndexEntry{test 123}
+  %\VignetteEngine{quarto::html}
+  %\VignetteEncoding{UTF-8}
+knitr:
+  opts_chunk:
+    collapse: true
+    comment: '#>'
+---
+
+```{r}
+#| label: setup
+library(rpt)
+```
