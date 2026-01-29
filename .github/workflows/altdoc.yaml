@@ -1,5 +1,8 @@
 # Workflow derived from https://github.com/r-lib/actions/tree/v2/examples
 # Need help debugging build failures? Start at https://github.com/r-lib/actions#where-to-find-help
+# Deploys altdoc for Pull Requests, tags, and pushes to main branch
+# PRs are deployed to /preview/pr<number>/
+# Tags are deployed to /<tag>/
 on:
   pull_request:
     branches:
@@ -10,17 +13,19 @@ on:
       - closed
     paths:
       - 'man/**'
-      - 'pkgdown/**'
+      - 'altdoc/**'
       - 'vignettes/**'
       - '_quarto.yml'
-      - '.github/workflows/pkgdown.yaml'
-      - 'Readme.md'
+      - '.github/workflows/altdoc.yaml'
+      - 'README.md'
   push:
     tags:
       - 'v[0-9]+.[0-9]+.[0-9]+'         # build on version tags
       - '!v[0-9]+.[0-9]+.[0-9]+.[0-9]+' # but not if version involves a dev component
     branches:
       - main
+  release:
+    types: [published]
   workflow_dispatch:
     inputs:
       tag:
@@ -31,8 +36,9 @@ on:
 name: altdoc
 
 jobs:
-  altdoc:
+  docs-build:
     runs-on: ubuntu-latest
+    if: ${{ !(github.event_name == 'pull_request' && github.event.action == 'closed') }}
     # Only restrict concurrency for non-PR jobs
     concurrency:
       group: altdoc-${{ github.event_name != 'pull_request' || github.run_id }}
@@ -41,36 +47,40 @@ jobs:
     permissions:
       contents: write
       pull-requests: write
+      issues: write
     steps:
       - uses: actions/checkout@v4
 
+      - uses: r-lib/actions/pr-fetch@v2
+        if: ${{ github.event_name == 'pull_request' }}
+        with:
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+
       - uses: quarto-dev/quarto-actions/setup@v2
 
-      - name: Get Script
-        run: curl -OLs https://eddelbuettel.github.io/r-ci/run.sh && chmod 0755 run.sh
+      - uses: r-lib/actions/setup-r@v2
+        with:
+          use-public-rspm: true
 
-      - name: Bootstrap
-        run: ./run.sh bootstrap
+      - uses: r-lib/actions/setup-r-dependencies@v2
+        with:
+          extra-packages: |
+            etiennebacher/altdoc
+            any::downlit
+            any::xml2
+            any::pkgload
+          needs: website
 
-      - name: Dependencies
-        run: ./run.sh install_all
-
-      - name: Build site
+      # If event is a PR, set subdir to 'preview/pr<pr_number>'
+      - name: "[PR] Set documentation subdirectory"
+        if: github.event_name == 'pull_request'
         run: |
-          # If parallel = TRUE in render_docs()
-          # future::plan(future::multicore)
-          install.packages(c("downlit", "xml2"))
-          install.packages(".", repos = NULL, type = "source")
-          install.packages("pkgload")
-          pkgload::load_all()
-          altdoc::render_docs(verbose = TRUE, parallel = FALSE, freeze = FALSE)
-        shell: Rscript {0}
+          echo "subdir=preview/pr${{ github.event.number }}" >> $GITHUB_ENV
 
       # If event is a tag, set subdir to '<tag_name>'
       - name: "[tag] Set documentation subdirectory"
         if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags/v')
         run: |
-          echo "PKGDOWN_DEV_MODE=release" >> $GITHUB_ENV
           echo "subdir=${GITHUB_REF#refs/tags/}" >> $GITHUB_ENV
 
       # If event is workflow_dispatch, set subdir to 'inputs.tag'
@@ -79,28 +89,133 @@ jobs:
         run: |
           echo "subdir=${{ github.event.inputs.tag }}" >> $GITHUB_ENV
 
-      # If event is a push to main (not a tag), set subdir to empty (deploy to root)
-      - name: "[main] Set documentation subdirectory to root"
-        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
-        run: |
-          echo "PKGDOWN_DEV_MODE=release" >> $GITHUB_ENV
-          echo "subdir=docs" >> $GITHUB_ENV
-
       - name: Debug subdir
         run: |
           echo "Subdir is set to: ${{ env.subdir }}"
 
-      - name: Deploy to GitHub pages 🚀
-        if: github.event_name != 'pull_request'
-        uses: JamesIves/github-pages-deploy-action@v4
-        with:
-          clean: false
-          branch: gh-pages
-          folder: docs
-          # target-folder: $subdir # figure out later
+      - name: Build site
+        run: |
+          pkgload::load_all()
+          altdoc::render_docs(verbose = TRUE, parallel = FALSE, freeze = FALSE)
+        shell: Rscript {0}
 
-      - name: Deploy PR Preview
+      - name: Deploy to GitHub Pages
+        id: deploy
+        run: |
+          set -e
+
+          # Save current commit SHA (works in detached HEAD state too)
+          CURRENT_SHA=$(git rev-parse HEAD)
+
+          # Determine subdirectory
+          subdir="${{ env.subdir }}"
+
+          # Save the docs directory from the current branch
+          cp -r docs /tmp/docs-to-deploy
+
+          # Configure git
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+
+          # Reset any changes from the build process before switching branches
+          # altdoc::render_docs() modifies .Rbuildignore and altdoc/pkgdown.yml
+          git reset --hard HEAD
+          git clean -fd
+
+          # Checkout gh-pages branch
+          if git fetch origin gh-pages:gh-pages 2>/dev/null; then
+            git checkout gh-pages
+          else
+            # gh-pages doesn't exist, create it as orphan
+            git checkout --orphan gh-pages
+            git rm -rf . || true
+          fi
+
+          # Ensure .nojekyll exists at root to prevent Jekyll processing
+          # This is critical for Quarto sites to work properly
+          # Must be done BEFORE any cleanup operations
+          touch .nojekyll
+
+          # Handle deployment based on whether we're deploying to a subdirectory
+          if [ -n "$subdir" ]; then
+            # PR preview mode: only update the specific preview subdirectory
+            # DO NOT touch the root or other directories
+            rm -rf "$subdir" || true
+            mkdir -p "$subdir"
+            cp -r /tmp/docs-to-deploy/* "$subdir/"
+          else
+            # Main branch or tag: update the root directory
+            # Clean everything except preview/ directory, .git/, and .nojekyll to preserve PR previews
+            find . -mindepth 1 -maxdepth 1 ! -name 'preview' ! -name '.git' ! -name '.nojekyll' -exec rm -rf {} +
+            cp -r /tmp/docs-to-deploy/* .
+            # Ensure .nojekyll is preserved (in case it was in docs and got overwritten)
+            touch .nojekyll
+          fi
+
+          # Commit and push
+          git add .
+          if git commit -m "Built site for rpt@${CURRENT_SHA:0:7}: $(date -u +%Y-%m-%d)"; then
+            git push origin gh-pages
+          else
+            echo "No changes to commit"
+          fi
+
+          # Switch back to original commit (works even in detached HEAD state)
+          git checkout "$CURRENT_SHA"
+
+          # Report deployed site URL
+          if [ -n "$subdir" ]; then
+            echo "url=https://ucd-serg.github.io/rpt/$subdir" >> $GITHUB_OUTPUT
+          else
+            echo "url=https://ucd-serg.github.io/rpt/" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Notify altdoc deployment
         if: github.event_name == 'pull_request'
-        uses: rossjrw/pr-preview-action@main
+        uses: hasura/comment-progress@v2.2.0
         with:
-          source-dir: docs
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          repository: ${{ github.repository }}
+          number: ${{ github.event.number }}
+          id: altdoc-deploy
+          recreate: true
+          message: >
+            :book: ${{ steps.deploy.outputs.url }}
+
+            Preview documentation for this PR (at commit ${{ github.event.pull_request.head.sha }})
+
+  altdoc-clean:
+    if: ${{ github.event_name == 'pull_request' && github.event.action == 'closed' }}
+    runs-on: ubuntu-latest
+    env:
+      GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: "gh-pages"
+
+      - name: Clean up PR Preview
+        run: |
+          git config --local user.name "$GITHUB_ACTOR"
+          git config --local user.email "$GITHUB_ACTOR@users.noreply.github.com"
+
+          preview_dir="preview/pr${{ github.event.pull_request.number }}"
+          if [ -d "$preview_dir" ]; then
+            git rm -r $preview_dir
+            git commit -m "Remove $preview_dir (GitHub Actions)" || echo 'No preview to remove'
+            git push origin || echo 'No preview to remove'
+          else
+            echo 'No preview to remove'
+          fi
+
+      - name: Notify altdoc cleanup
+        uses: hasura/comment-progress@v2.2.0
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          repository: ${{ github.repository }}
+          number: ${{ github.event.number }}
+          id: altdoc-deploy
+          message: |
+            _:closed_book: Preview documentation for this PR has been cleaned up._

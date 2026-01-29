@@ -3,13 +3,19 @@ CMD
 Callouts
 CodeFactor
 Codecov
+KaTeX
 Lifecycle
+MathJax
+Quarto
+RSPM
 RevealJS
 Tabsets
 ackage
+altdoc
 callout
 callouts
 cdot
+docsify
 emplate
 foldable
 frac
@@ -18,6 +24,7 @@ linter
 lintr
 mc
 pkgdown
+quarto
 serodynamics
 tabset
 toc

@@ -24,5 +24,7 @@ README.html
 
 /.quarto/
 altdoc/freeze.rds
+*.Rout.save
+*.Rout
 _quarto/*
 !_quarto/_freeze/
